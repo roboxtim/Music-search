@@ -8,6 +8,10 @@ import { changeUser } from "../../store/slices/userSlice";
 import { RootState } from "../../store/store";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Container } from "../../components/Ui/container/Container.style";
+import { Heading } from "../../components/TypoGraphy/Heading";
+import { StyledLoginPage } from "./LoginPage.style";
+import { StyledLink } from "../../components/TypoGraphy/StyledLink";
 
 interface LoginPageForm {
   username: string;
@@ -15,11 +19,11 @@ interface LoginPageForm {
 }
 
 const mockuser = {
-  mail: 'test@mail.com',
-  phone_number: '901234567',
+  mail: "test@mail.com",
+  phone_number: "901234567",
   user_id: 1,
-  name: 'Alex',
-}
+  name: "Alex",
+};
 
 const loginFormSchema = yup.object({
   username: yup.string().required("Обязательно поле"),
@@ -42,57 +46,63 @@ export const LoginPage = () => {
     },
   });
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const user = useSelector((state: RootState) => state.userSlice.user)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.userSlice.user);
 
-  const onLoginSubmit: SubmitHandler<LoginPageForm> = (data) => {
+  const onLoginSubmit: SubmitHandler<LoginPageForm> = () => {
     // console.log("Data: ", data);
-    dispatch(changeUser(mockuser))
+    dispatch(changeUser(mockuser));
   };
 
   useEffect(() => {
-    console.log('user ', user);
+    console.log("user ", user);
     if (user?.user_id) {
-      navigate('/main')
+      navigate("/main");
     }
-  }, [user])
+  }, [user]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onLoginSubmit)}>
-        <Controller
-          name="username"
-          control={control}
-          render={({ field }) => (
-            <Input
-              placeholder="Имя пользователя"
-              type="text"
-              isError={errors.username ? true : false}
-              errorMessage={errors.username?.message}
-              {...field}
-            />
-          )}
-        />
-        <Controller
-          name="userpassword"
-          control={control}
-          render={({ field }) => (
-            <Input
-              placeholder="Пароль"
-              type="password"
-              isError={errors.userpassword ? true : false}
-              errorMessage={errors.userpassword?.message}
-              {...field}
-            />
-          )}
-        />
-        <Button
-          type="submit"
-          buttonText="Войти"
-          disabled={!!Object.keys(errors).length}
-        />
-      </form>
-    </div>
+    <Container>
+      <StyledLoginPage>
+        <Heading headingText="Войдите в свой аккаунт" headingType="h2" />
+        <form onSubmit={handleSubmit(onLoginSubmit)}>
+          <Controller
+            name="username"
+            control={control}
+            render={({ field }) => (
+              <Input
+                label="Имя пользователя:"
+                placeholder="Имя пользователя"
+                type="text"
+                isError={errors.username ? true : false}
+                errorMessage={errors.username?.message}
+                {...field}
+              />
+            )}
+          />
+          <Controller
+            name="userpassword"
+            control={control}
+            render={({ field }) => (
+              <Input
+                label="Пароль"
+                placeholder="Введите свой пароль"
+                type="password"
+                isError={errors.userpassword ? true : false}
+                errorMessage={errors.userpassword?.message}
+                {...field}
+              />
+            )}
+          />
+          <Button
+            type="submit"
+            buttonText="Войти"
+            disabled={!!Object.keys(errors).length}
+          />
+        </form>
+        <StyledLink to="/main" linkText="Забыли пароль?" />
+      </StyledLoginPage>
+    </Container>
   );
 };
