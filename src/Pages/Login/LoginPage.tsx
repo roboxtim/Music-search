@@ -3,15 +3,15 @@ import { Button } from "../../components/Ui/button/Button";
 import { Input } from "../../components/Ui/input/Input";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeUser } from "../../store/slices/userSlice";
-import { RootState } from "../../store/store";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "../../components/Ui/container/Container.style";
 import { Heading } from "../../components/TypoGraphy/Heading";
 import { StyledLoginPage } from "./LoginPage.style";
 import { StyledLink } from "../../components/TypoGraphy/StyledLink";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 interface LoginPageForm {
   username: string;
@@ -48,7 +48,7 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state: RootState) => state.userSlice.user);
+  const user = useTypedSelector((state) => state.userSlice.user);
 
   const onLoginSubmit: SubmitHandler<LoginPageForm> = () => {
     // console.log("Data: ", data);
@@ -60,7 +60,7 @@ export const LoginPage = () => {
     if (user?.user_id) {
       navigate("/main");
     }
-  }, [user]);
+  }, [user]); // eslint-disable-line
 
   return (
     <Container>

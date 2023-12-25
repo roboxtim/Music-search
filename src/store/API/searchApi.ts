@@ -9,20 +9,18 @@ export const searchApi = createApi({
     prepareHeaders: (headers) => {
       headers.set('X-RapidAPI-Key', xKey);
       headers.set('X-RapidAPI-Host', xHost)
-    }
+    },
   }),
+  refetchOnFocus: true,
   endpoints: (build) => ({
     searchLyrics: build.query<ServerResponse, string>({
-      query: (q: string) => ({
-        url: `/search/?q=${q}`,
+      query: (q: any | undefined) => ({ // eslint-disable-line
+        url: `/search`,
         params: {
           q,
-          per_page: 10,
-          page: 1
-
         },
       }),
-    })
+    }),
   }),
 })
 

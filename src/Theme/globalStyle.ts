@@ -10,7 +10,6 @@ export const GlobalStyle = createGlobalStyle`
   body {
     min-width: 530px;
     margin: 0;
-    font-family: "Inter";
     background-color: ${(props) => props.theme.colors.bgc};
     color: ${(props) => props.theme.colors.textColor};
   }

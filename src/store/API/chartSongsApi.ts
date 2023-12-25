@@ -1,20 +1,19 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseUrl, xKey, xHost } from "../../utils/baseUrl";
+// import { baseUrl, xKey, xHost } from "../../utils/baseUrl";
 
 export const chartSongsApi = createApi({
   reducerPath: "chartSongsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: baseUrl,
-    prepareHeaders: (headers) => {
-      headers.set("X-RapidAPI-Key", xKey);
-      headers.set("X-RapidAPI-Host", xHost);
-    },
+    baseUrl: 'https://api.genius.com/',
+    prepareHeaders: (header) => {
+      header.set('Authorization', 'Bearer W-3-i9p485xn4sxbdF785RSsCbSqaBKseRjvui_Mal9OPzW8yCySdQ9rxUZDmcr3')
+    }
   }),
   endpoints: (build) => ({
-    chartSongs: build.query({
-      query: () => '/chart/songs'
+    getSongById: build.query({
+      query: (id) => `songs/${id}`
     })
   })
 });
 
-export const { useChartSongsQuery } = chartSongsApi
+export const { useGetSongByIdQuery } = chartSongsApi
