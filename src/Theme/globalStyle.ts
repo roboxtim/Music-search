@@ -43,6 +43,19 @@ export const GlobalStyle = createGlobalStyle`
     user-select: none; //? Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
   }
 
+  /* @font-face {
+    font-family: 'Roboto', sans-serif;;
+    src: url('https://fonts.google.com/specimen/Roboto');
+  } */
+
+  @font-face {
+  font-family: 'YourFont-Regular';
+  src: url('/fonts/YourFont-Regular.woff2') format('woff2'), /* Формат WOFF2 */
+       url('/fonts/YourFont-Regular.woff') format('woff'); /* Формат WOFF */
+  font-weight: normal;
+  font-style: normal;
+}
+
   @media (max-width: 730px) {
     input, button {
       padding: 10px 12px;

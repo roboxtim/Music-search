@@ -22,11 +22,12 @@ export const searchApi = createApi({
         },
       }),
     }),
-    chartsSongs: build.query<ChartsResponse, string>({
-      query: (timePeriod: string) => ({
+    chartsSongs: build.query<ChartsResponse, [string, string]>({
+      query: (params: [string, string]) => ({
         url: 'chart/songs/',
         params: {
-          time_period: timePeriod
+          time_period: params[0],
+          chart_genre: params[1],
         }
       })
     })
