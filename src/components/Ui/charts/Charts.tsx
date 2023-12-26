@@ -2,15 +2,17 @@ import { useState } from "react";
 import { useChartsSongsQuery } from "../../../store/API/chartSongsApi";
 import { Heading } from "../../TypoGraphy/Heading";
 import { StyledCharts } from "./Charts.style";
-import { ChartGenre } from "../chartDropdown/ChartGenre";
+import { ChartGenre } from "../chartDropdown/ChartOption";
 
 export const Charts = () => {
   const [timePeriod, setTimePeriod] = useState("day");
   const [chartGenre, setChartGenre] = useState("all");
+  const [isOpen, setIsOpen] = useState(false);
   const { data, isError, isLoading } = useChartsSongsQuery([
     timePeriod,
     chartGenre,
   ]);
+
   const chartsData = data?.chart_items;
   console.log(chartsData);
 
@@ -40,9 +42,11 @@ export const Charts = () => {
     <StyledCharts>
       <div className="chartsHeader">
         <Heading headingText="Charts" headingType="h1" />
-        <div className="chartsType">
-          <div className="chartsOption">
-            <span>SONGS / ALL GENRES / TODAY</span>
+        <div className="dropdown">
+          <div className="chartsOption" onClick={() => setIsOpen(!isOpen)}>
+            <div className="firstBlockText">
+              <p>SONGS / ALL GENRES / TODAY</p>
+            </div>
             <div className="chartsBtn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -54,13 +58,15 @@ export const Charts = () => {
               </svg>
             </div>
           </div>
-          <div className="chartDropdown">
+          <div className={`chartDropdown ${isOpen ? "active" : ""}`}>
             <div className="typeOption">
               <Heading headingText="Type" headingType="h4" />
               <p>Songs</p>
               <p>Album</p>
               <p>Artist</p>
               <p>Lyrics</p>
+              <p></p>
+              <p></p>
             </div>
             <ChartGenre
               title="Genre"

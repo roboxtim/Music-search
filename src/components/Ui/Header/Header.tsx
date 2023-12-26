@@ -1,24 +1,24 @@
-// import { useTypedSelector } from "../../../hooks/useTypedSelector"
-// import { useEffect, useState } from "react";
+import { useTypedSelector } from "../../../hooks/useTypedSelector"
+import { useEffect, useState } from "react";
 import { Heading } from "../../TypoGraphy/Heading";
 import { Input } from "../input/Input";
 import { StyledHeader } from "./Header.style";
-// import { useSearchLyricsQuery } from "../../../store/API/searchApi";
+import { useSearchLyricsQuery } from "../../../store/API/searchApi";
 
 export const Header = () => {
-  // const user = useTypedSelector((state) => state.userSlice.user)
-  // const [searchValue, setSearchData] = useState("");
-  // const [dropDown, setDropDown] = useState(false)
-  // const { data: searchData } = useSearchLyricsQuery(searchValue, {
-  //   refetchOnFocus: true,
-  // });
+  const user = useTypedSelector((state) => state.userSlice.user)
+  const [searchValue, setSearchData] = useState("");
+  const [dropDown, setDropDown] = useState(false)
+  const { data: searchData } = useSearchLyricsQuery(searchValue, {
+    refetchOnFocus: true,
+  });
 
-  // const searchResult = searchData?.hits;
-  // console.log(searchResult);
+  const searchResult = searchData?.hits;
+  console.log(searchResult);
 
-  // useEffect(() => {
-  //   setDropDown(searchResult?.length > 0)
-  // }, [searchResult])
+  useEffect(() => {
+    setDropDown(searchResult?.length > 0)
+  }, [searchResult])
 
   return (
     <StyledHeader>
@@ -27,11 +27,11 @@ export const Header = () => {
           placeholder="Search song"
           type="text"
           isError
-          // value={searchValue}
-          // onChange={(e) => setSearchData(e.target.value)}
+          value={searchValue}
+          onChange={(e) => setSearchData(e.target.value)}
         />
         <div className="searchResult">
-          {/* {dropDown && <ul>
+          {dropDown && <ul>
           <Heading headingText="Search result" headingType="h3" />
             {searchResult &&
               searchResult.map(
@@ -51,7 +51,7 @@ export const Header = () => {
                   </li>
                 )
               )}
-          </ul>} */}
+          </ul>}
         </div>
       </div>
       <div className="headerLogo">

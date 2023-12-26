@@ -11,24 +11,23 @@ export const StyledCharts = styled.div`
     h1 {
       font-size: 80px;
     }
-
-    .chartsType {
-      align-self: center;
-      border: 1px solid;
-      padding: 12px 16px;
-      width: 360px;
-
-      .chartsOption {
-        display: flex;
-        padding-bottom: 12px;
-
-        .chartsBtn {
-          padding-left: 24px;
-        }
-      }
-    }
   }
 
+  .dropdown {
+    width: 316px;
+    position: relative;
+  }
+
+  .chartsOption {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border: 2px solid;
+
+    .chartsBtn {
+      cursor: pointer;
+    }
+  }
   .chartsList {
     display: grid;
     grid-template-columns: 1fr;
@@ -65,24 +64,69 @@ export const StyledCharts = styled.div`
   }
 
   .chartDropdown {
+    display: none;
+  }
+
+  .chartDropdown.active {
     display: flex;
     justify-content: space-between;
     width: 100%;
     max-width: 800px;
+    align-self: center;
+    border: 2px solid;
+    border-top: 0;
+    position: absolute;
+    background-color: #f6f6f6;
 
-    .typeOption{
-    flex: 1;
-    padding: 20px 0;
+    .typeOption {
+      flex: 1;
+
+    }
+
+    h4 {
+      font-size: 18px;
+      padding: 12px 16px;
+      border: 2px solid #ccc;
+      border-top: 0;
+      border-left: 0;
+    }
+
+    .typeOption:last-child h4 {
+      border-right: 0;
+    }
+
+    .typeOption p {
+      cursor: pointer;
+      padding: 12px 16px;
+      border: 2px solid #ccc;
+      border-top: 0;
+      border-left: 0;
+    }
+
+    .typeOption p.active {
+      font-weight: bold;
+    }
+
+    .typeOption:nth-child(1) p:nth-child(6) {
+      border-left: 0;
+      border-bottom: 0;
+      padding: 23.3px 32px;
+    }
+    .typeOption:nth-child(1) p:nth-child(7) {
+      border-left: 0;
+      border-bottom: 0;
+      padding: 20.2px 32px;
+    }
+    .typeOption:nth-child(2) p:nth-child(6) {
+      border-left: 0;
+    }
+    .typeOption:nth-child(2) p:nth-child(7) {
+      border-bottom: 0;
+    }
+
+    .typeOption:last-child p {
+      border-right: 0;
+    }
   }
 
-  .typeOption p {
-    margin: 5px 0;
-    cursor: pointer;
-  }
-
-  h4 {
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
-  }
 `;
