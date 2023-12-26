@@ -69,18 +69,13 @@ export const StyledCharts = styled.div`
     justify-content: space-between;
     width: 100%;
     max-width: 800px;
-  }
 
-  .type,
-  .genre,
-  .time {
+    .typeOption{
     flex: 1;
     padding: 20px 0;
   }
 
-  .type p,
-  .genre p,
-  .time p {
+  .typeOption p {
     margin: 5px 0;
     cursor: pointer;
   }
@@ -88,5 +83,6 @@ export const StyledCharts = styled.div`
   h4 {
     font-size: 18px;
     margin-bottom: 8px;
+  }
   }
 `;
