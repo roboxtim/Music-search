@@ -20,8 +20,16 @@ export const chartSongsApi = createApi({
           chart_genre: params[1],
         }
       })
+    }),
+    getChartAlbum: build.query<ChartsResponse, string>({
+      query: (timePeriod: string) => ({
+        url: 'chart/albums',
+        params: {
+          time_period: timePeriod
+        }
+      })
     })
   }),
 })
 
-export const { useChartsSongsQuery } = chartSongsApi
+export const { useChartsSongsQuery, useGetChartAlbumQuery } = chartSongsApi
