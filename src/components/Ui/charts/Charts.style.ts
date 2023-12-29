@@ -28,7 +28,16 @@ export const StyledCharts = styled.div`
       cursor: pointer;
     }
   }
-  .chartsList {
+
+  .open {
+    display: block;
+  }
+
+  .close {
+    display: none;
+  }
+
+  .chartsListSongs {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;

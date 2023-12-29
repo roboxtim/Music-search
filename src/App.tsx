@@ -1,6 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
 import { LoginPage } from "./Pages/Login/LoginPage";
 import { MainPage } from "./Pages/MainPage/MainPgae";
+import { SongDetails } from "./Pages/SongDetails/SongDetails";
 
 const routerConfig = createBrowserRouter([
   {
@@ -10,6 +12,10 @@ const routerConfig = createBrowserRouter([
   {
     path: '/main',
     element: <MainPage /> 
+  },
+  {
+    path: '/song-details/:songId',
+    element: <SongDetails />
   }
 ])
 

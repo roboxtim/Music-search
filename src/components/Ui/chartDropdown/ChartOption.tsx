@@ -16,12 +16,6 @@ export const ChartGenre = ({
   options,
   onSelect,
 }: GenreSelectorProps) => {
-  // const [isChecked, setIsChecked] = useState(false)
-
-  // const handleBtn = (value: string) => {
-  //   onSelect(value)
-  //   setIsChecked(!isChecked)
-  // }
   return (
     <div className="typeOption">
       <Heading headingText={title} headingType="h4" />

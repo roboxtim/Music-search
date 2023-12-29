@@ -59,7 +59,8 @@ export const Header = () => {
       </div>
       <div className="userInfo">
         <img className="userImg" src="./public/img/user.png" alt="" />
-        <Heading headingText="Alex" headingType="h3" />
+        {/* <Heading headingText="Alex" headingType="h3" /> */}
+        <h3>{user?.name}</h3>
       </div>
     </StyledHeader>
   );
