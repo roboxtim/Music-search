@@ -12,7 +12,7 @@ export const songdetailsApi = createApi({
     },
   }),
   endpoints: (build) => ({
-    getSongById: build.query<IGetSongResponse, any>({
+    getSongById: build.query<IGetSongResponse, any>({ // eslint-disable-line
       query: (songId: string) => ({
         url: `/song/details/?id=${songId}`,
       }),
