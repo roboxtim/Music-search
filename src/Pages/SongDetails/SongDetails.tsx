@@ -1,18 +1,23 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useLazyGetSongByIdQuery } from "../../store/API/songDetailsApi";
+import { useGetSongLyricsQuery, useLazyGetSongByIdQuery } from "../../store/API/songDetailsApi";
 import { Container } from "../../components/Ui/container/Container.style";
 import { Header } from "../../components/Ui/Header/Header";
 import { NavBar } from "../../components/Ui/nav/NavBar";
 import { StyledSongDetails } from "./SongDetails.style";
 import { Heading } from "../../components/TypoGraphy/Heading";
+import { SongLyrics } from "../../components/TypoGraphy/SongLyrics";
 
 export const SongDetails = () => {
   const { songId } = useParams();
   const [fetchTriger, { data }] = useLazyGetSongByIdQuery();
+  const {data: songLyricsData} = useGetSongLyricsQuery(songId);
+
+  const lyricsData = songLyricsData?.lyrics;
+  console.log(lyricsData?.lyrics.body.plain)
 
   const dataSong = data?.song;
-  console.log(data);
+  console.log(dataSong);
 
   useEffect(() => {
     if (songId) {
@@ -48,6 +53,10 @@ export const SongDetails = () => {
                 .toFixed(1)
                 .replace(/\.0+$/, "") + "k"}
           </p>
+        </div>
+        <div className="lyrics">
+          <SongLyrics lyricsHTML={lyricsData?.lyrics.body.html} />
+          {/* <p dangerouslySetInnerHTML={{ __html: lyricsData?.lyrics.body.html }}>{lyricsData?.lyrics.body.html}</p> */}
         </div>
       </StyledSongDetails>
     </Container>

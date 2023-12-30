@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl, xHost, xKey } from "../../utils/baseUrl";
 import { IGetSongResponse } from "../../models/song";
+import { ILyricsResponse } from "../../models/lyrics";
 
 export const songdetailsApi = createApi({
   reducerPath: "songdetailsApi",
@@ -17,7 +18,12 @@ export const songdetailsApi = createApi({
         url: `/song/details/?id=${songId}`,
       }),
     }),
+    getSongLyrics: build.query<ILyricsResponse, any>({ // eslint-disable-line
+      query: (lyricsId: string) => ({
+        url: `/song/lyrics/?id=${lyricsId}`
+      })
+    })
   }),
 });
 
-export const { useLazyGetSongByIdQuery } = songdetailsApi
+export const { useLazyGetSongByIdQuery, useGetSongLyricsQuery } = songdetailsApi
