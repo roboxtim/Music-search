@@ -19,12 +19,13 @@ export const MainPage = () => {
   //   fetchSong(songName)
   // }
 
-
   return (
-    <Container>
-      <Header />
-      <NavBar />
-      <Charts />
-    </Container>
+    <>
+      <Container>
+        <Header />
+        <NavBar />
+        <Charts />
+      </Container>
+    </>
   );
 };
