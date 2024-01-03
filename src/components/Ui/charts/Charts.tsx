@@ -2,36 +2,37 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
-  useGetChartsSongsQuery
-  // useGetChartAlbumQuery,
-  // useGetChartArtistQuery,
-  // useGetChartLyricsQuery,
+  useGetChartsSongsQuery,
+  useGetChartAlbumQuery,
+  useGetChartArtistQuery,
+  useGetChartLyricsQuery,
 } from "../../../store/API/chartSongsApi";
 import { Heading } from "../../TypoGraphy/Heading";
 import { StyledCharts } from "./Charts.style";
 import { ChartGenre } from "../chartDropdown/ChartOption";
 
 export const Charts = () => {
+  const [selectedType, setSelectedType] = useState('songs')
   const [timePeriod, setTimePeriod] = useState("day");
   const [chartGenre, setChartGenre] = useState("all");
   const [isOpen, setIsOpen] = useState(false);
 
   const { data, isError, isLoading } = useGetChartsSongsQuery([timePeriod, chartGenre]);
 
-  // const {
-  //   data: albumData,
-  //   isError: albumError,
-  //   isLoading: albumLoading,
-  // } = useGetChartAlbumQuery(timePeriod);
+  const {
+    data: albumData,
+    isError: albumError,
+    isLoading: albumLoading,
+  } = useGetChartAlbumQuery(timePeriod);
 
-  // const { data: artistData } = useGetChartArtistQuery(timePeriod)
+  const { data: artistData } = useGetChartArtistQuery(timePeriod)
 
-  // const { data: lyricsData, isError: errorLytics } = useGetChartLyricsQuery(timePeriod)
+  const { data: lyricsData, isError: errorLytics } = useGetChartLyricsQuery(timePeriod)
 
   const chartsData = data?.chart_items;
-  // const chartAlbumData = albumData?.chart_items;
-  // const chartArtistData = artistData?.chart_items;
-  // const chartLyricsData = lyricsData?.chart_items;
+  const chartAlbumData = albumData?.chart_items;
+  const chartArtistData = artistData?.chart_items;
+  const chartLyricsData = lyricsData?.chart_items;
 
   const genreOptions = [
     { label: "All", value: "all" },
@@ -51,16 +52,22 @@ export const Charts = () => {
     { label: "Songs", value: "songs" },
     { label: "Albums", value: "albums" },
     { label: "Artists", value: "artists" },
-    { label: "Lyrics", value: "lyrics" },
+    { label: "Lyrics", value: "referents" },
     { label: "", value: "" },
     { label: "", value: "" },
   ];
 
+  const handleTypeChange = (newType: string) => {
+    setSelectedType(newType);
+    setIsOpen(false)
+  };
   const handleTimePeriodChange = (newPeriod: string) => {
     setTimePeriod(newPeriod);
+    setIsOpen(false)
   };
   const handleChartGenreChange = (newGenre: string) => {
     setChartGenre(newGenre);
+    setIsOpen(false)
   };
 
   return (
@@ -87,7 +94,7 @@ export const Charts = () => {
             <ChartGenre
               title="Type"
               options={typeOptions}
-              onSelect={handleTimePeriodChange}
+              onSelect={handleTypeChange}
             />
             <ChartGenre
               title="Genre"
@@ -102,103 +109,111 @@ export const Charts = () => {
           </div>
         </div>
       </div>
-      <div className="chartsListSongs">
-        {isLoading && <p>Loading</p>}
-        {isError && <p>Error</p>}
-        {chartsData &&
-          chartsData.map(
-            (
-              elem: any, // eslint-disable-line
-              i: number
-            ) => (
-              <Link to={`/song-details/${elem.item.id}`}>
+      {selectedType === 'songs' && (
+        <div className="chartsListSongs">
+          {isLoading && <p>Loading</p>}
+          {isError && <p>Error</p>}
+          {chartsData &&
+            chartsData.map(
+              (
+                elem: any, // eslint-disable-line
+                i: number
+              ) => (
+                <Link to={`/song-details/${elem.item.id}`}>
+                  <div className="chartsElems" key={elem.item.id}>
+                    <p className="chartNum">{i + 1}</p>
+                    <img
+                      className="chartImg"
+                      src={elem.item.song_art_image_url}
+                      alt=""
+                    />
+                    <p className="chartTitle">{elem.item.title}</p>
+                    <p className="chartArtist">{elem.item.artist_names}</p>
+                    <p className="chartView">
+                      {elem.item.stats.pageviews > 1000000
+                        ? (elem.item.stats.pageviews / 1000000)
+                            .toFixed(1)
+                            .replace(/\.0+$/, "") + "M"
+                        : (elem.item.stats.pageviews / 100000)
+                            .toFixed(1)
+                            .replace(/\.0+$/, "") + "k"}
+                    </p>
+                  </div>
+                </Link>
+              )
+            )}
+        </div>
+      )}
+      {selectedType === 'albums' && (
+        <div className="chartListAlbums chartsListSongs">
+          {albumError && <p>Error</p>}
+          {albumLoading && <p>Loading</p>}
+          {chartAlbumData &&
+            chartAlbumData.map(
+              (
+                elem: any, // eslint-disable-line
+                i: number
+              ) => (
                 <div className="chartsElems" key={elem.item.id}>
                   <p className="chartNum">{i + 1}</p>
                   <img
                     className="chartImg"
-                    src={elem.item.song_art_image_url}
+                    src={elem.item.cover_art_url}
                     alt=""
                   />
-                  <p className="chartTitle">{elem.item.title}</p>
-                  <p className="chartArtist">{elem.item.artist_names}</p>
-                  <p className="chartView">
-                    {elem.item.stats.pageviews > 1000000
-                      ? (elem.item.stats.pageviews / 1000000)
-                          .toFixed(1)
-                          .replace(/\.0+$/, "") + "M"
-                      : (elem.item.stats.pageviews / 100000)
-                          .toFixed(1)
-                          .replace(/\.0+$/, "") + "k"}
-                  </p>
+                  <p className="chartTitle">{elem.item.name}</p>
+                  <p className="chartArtist">{elem.item.artist.name}</p>
                 </div>
-              </Link>
-            )
-          )}
-      </div>
-      {/* <div className="chartListAlbums chartsListSongs">
-        {albumError && <p>Error</p>}
-        {albumLoading && <p>Loading</p>}
-        {chartAlbumData &&
-          chartAlbumData.map(
-            (
-              elem: any, // eslint-disable-line
-              i: number
-            ) => (
-              <div className="chartsElems" key={elem.item.id}>
-                <p className="chartNum">{i + 1}</p>
-                <img
-                  className="chartImg"
-                  src={elem.item.cover_art_url}
-                  alt=""
-                />
-                <p className="chartTitle">{elem.item.name}</p>
-                <p className="chartArtist">{elem.item.artist.name}</p>
-              </div>
-            )
-          )}
-      </div> */}
-      {/* <div className="chartListArtists chartsListSongs">
-        {albumError && <p>Error</p>}
-        {albumLoading && <p>Loading</p>}
-        {chartArtistData &&
-          chartArtistData.map(
-            (
-              elem: any, // eslint-disable-line
-              i: number
-            ) => (
-              <div className="chartsElems" key={elem.item.id}>
-                <p className="chartNum">{i + 1}</p>
-                <img
-                  className="chartImg"
-                  src={elem.item.image_url}
-                  alt=""
-                />
-                <p className="chartArtist">{elem.item.name}</p>
-              </div>
-            )
-          )}
-      </div> */}
-      {/* <div className="chartListLyrics chartsListSongs">
-        {errorLytics && <p>Error</p>}
-        {albumLoading && <p>Loading</p>}
-        {chartLyricsData &&
-          chartLyricsData.map(
-            (
-              elem: any, // eslint-disable-line
-              i: number
-            ) => (
-              <div className="chartsElems" key={elem.item.id}>
-                <p className="chartNum">{i + 1}</p>
-                <img
-                  className="chartImg"
-                  src={elem.item.annotatable.image_url}
-                  alt=""
-                />
-                <p className="chartArtist">{elem.item.fragment}</p>
-              </div>
-            )
-          )}
-      </div> */}
+              )
+            )}
+        </div> 
+      )}
+      {selectedType === 'artists' && (
+        <div className="chartListArtists chartsListSongs">
+          {albumError && <p>Error</p>}
+          {albumLoading && <p>Loading</p>}
+          {chartArtistData &&
+            chartArtistData.map(
+              (
+                elem: any, // eslint-disable-line
+                i: number
+              ) => (
+                <div className="chartsElems" key={elem.item.id}>
+                  <p className="chartNum">{i + 1}</p>
+                  <img
+                    className="chartImg"
+                    src={elem.item.image_url}
+                    alt=""
+                  />
+                  <p className="chartArtist">{elem.item.name}</p>
+                </div>
+              )
+            )}
+        </div>
+      )}
+      {selectedType === 'referents' && (
+        <div className="chartListLyrics chartsListSongs">
+          {errorLytics && <p>Error</p>}
+          {albumLoading && <p>Loading</p>}
+          {chartLyricsData &&
+            chartLyricsData.map(
+              (
+                elem: any, // eslint-disable-line
+                i: number
+              ) => (
+                <div className="chartsElems" key={elem.item.id}>
+                  <p className="chartNum">{i + 1}</p>
+                  <img
+                    className="chartImg"
+                    src={elem.item.annotatable.image_url}
+                    alt=""
+                  />
+                  <p className="chartArtist">{elem.item.fragment}</p>
+                </div>
+              )
+            )}
+        </div>
+      )}
     </StyledCharts>
   );
 };

@@ -9,7 +9,7 @@ export const StyledSongDetails = styled.div`
       width: 240px;
     }
   } */
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -91,6 +91,56 @@ export const StyledSongDetails = styled.div`
       &:hover {
         text-decoration: underline;
       }
+    }
+  } */
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  background-color: #f9f9f9;
+
+  .songInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .songImg {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    .songName {
+      flex: 1;
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+      h3 {
+        font-size: 18px;
+        margin-bottom: 5px;
+        color: #555;
+      }
+      h4 {
+        font-size: 16px;
+        margin-bottom: 5px;
+        color: #777;
+      }
+      p {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .lyrics {
+    .lyricsText {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
     }
   }
 `;

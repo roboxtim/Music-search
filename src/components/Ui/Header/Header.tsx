@@ -4,6 +4,7 @@ import { Heading } from "../../TypoGraphy/Heading";
 import { Input } from "../input/Input";
 import { StyledHeader } from "./Header.style";
 import { useSearchLyricsQuery } from "../../../store/API/searchApi";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const user = useTypedSelector((state) => state.userSlice.user);
@@ -56,6 +57,7 @@ export const Header = () => {
           )}
         </div>
       </div>
+      <Link to='/main'>
       <div className="headerLogo">
         <svg
           version="1.0"
@@ -88,6 +90,7 @@ export const Header = () => {
           </g>
         </svg>
       </div>
+      </Link>
       <div className="userInfo">
         <img className="userImg" src="./public/img/user.png" alt="User img" />
         {/* <Heading headingText="Alex" headingType="h3" /> */}

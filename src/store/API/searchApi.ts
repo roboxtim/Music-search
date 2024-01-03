@@ -15,7 +15,7 @@ export const searchApi = createApi({
   refetchOnFocus: true,
   endpoints: (build) => ({
     searchLyrics: build.query<ServerResponse, string>({
-      query: (q: any | undefined) => ({ // eslint-disable-line
+      query: (q: any) => ({ // eslint-disable-line
         url: `/search`,
         params: {
           q,

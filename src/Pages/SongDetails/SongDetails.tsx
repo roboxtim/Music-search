@@ -41,8 +41,13 @@ export const SongDetails = () => {
               <Heading headingText={dataSong?.title} headingType="h2" />
               <Heading headingText={dataSong?.artist_names} headingType="h3" />
               <Heading headingText="Produced by" headingType="h4" />
-              <p>{dataSong?.producer_artists[0].name} &</p>
-              <p>{dataSong?.producer_artists[1].name}</p>
+              <p>
+                {dataSong?.producer_artists.length > 0
+                  ? dataSong.producer_artists.length === 1
+                    ? dataSong.producer_artists[0].name
+                    : `${dataSong.producer_artists[0].name} & ${dataSong.producer_artists[1].name}`
+                  : "No producer information"}
+              </p>
             </div>
           </div>
           <div className="songViews">
