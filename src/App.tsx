@@ -4,6 +4,7 @@ import { LoginPage } from "./Pages/Login/LoginPage";
 import { MainPage } from "./Pages/MainPage/MainPgae";
 import { SongDetails } from "./Pages/SongDetails/SongDetails";
 import { AlbumDetails } from "./Pages/AlbumDetails/AlbumDetails";
+import { ArtistDetails } from "./Pages/ArtistDetails/ArtistDetails";
 
 const routerConfig = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const routerConfig = createBrowserRouter([
   {
     path: '/album-details/:albumId',
     element: <AlbumDetails />
+  },
+  {
+    path: '/artist-details/:artistId',
+    element: <ArtistDetails />
   },
 ])
 

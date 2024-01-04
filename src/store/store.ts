@@ -5,6 +5,7 @@ import { chartSongsApi } from "./API/chartSongsApi";
 import { songdetailsApi } from "./API/songDetailsApi";
 import { userApi } from "./API/loginApi";
 import { albumDetailsApi } from "./API/albumDetailsApi";
+import { artistDetailsApi } from "./API/artistDetailsApi";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     [songdetailsApi.reducerPath]: songdetailsApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [albumDetailsApi.reducerPath]: albumDetailsApi.reducer,
+    [artistDetailsApi.reducerPath]: artistDetailsApi.reducer,
   },
   middleware: (getDefaultMiddleWare) =>
     getDefaultMiddleWare().concat([
@@ -22,6 +24,7 @@ export const store = configureStore({
       songdetailsApi.middleware,
       userApi.middleware,
       albumDetailsApi.middleware,
+      artistDetailsApi.middleware,
     ]),
 });
 

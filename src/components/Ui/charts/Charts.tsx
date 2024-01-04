@@ -12,12 +12,15 @@ import { StyledCharts } from "./Charts.style";
 import { ChartGenre } from "../chartDropdown/ChartOption";
 
 export const Charts = () => {
-  const [selectedType, setSelectedType] = useState('songs')
+  const [selectedType, setSelectedType] = useState("songs");
   const [timePeriod, setTimePeriod] = useState("day");
   const [chartGenre, setChartGenre] = useState("all");
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data, isError, isLoading } = useGetChartsSongsQuery([timePeriod, chartGenre]);
+  const { data, isError, isLoading } = useGetChartsSongsQuery([
+    timePeriod,
+    chartGenre,
+  ]);
 
   const {
     data: albumData,
@@ -25,9 +28,10 @@ export const Charts = () => {
     isLoading: albumLoading,
   } = useGetChartAlbumQuery(timePeriod);
 
-  const { data: artistData } = useGetChartArtistQuery(timePeriod)
+  const { data: artistData } = useGetChartArtistQuery(timePeriod);
 
-  const { data: lyricsData, isError: errorLytics } = useGetChartLyricsQuery(timePeriod)
+  const { data: lyricsData, isError: errorLytics } =
+    useGetChartLyricsQuery(timePeriod);
 
   const chartsData = data?.chart_items;
   const chartAlbumData = albumData?.chart_items;
@@ -59,15 +63,15 @@ export const Charts = () => {
 
   const handleTypeChange = (newType: string) => {
     setSelectedType(newType);
-    setIsOpen(false)
+    setIsOpen(false);
   };
   const handleTimePeriodChange = (newPeriod: string) => {
     setTimePeriod(newPeriod);
-    setIsOpen(false)
+    setIsOpen(false);
   };
   const handleChartGenreChange = (newGenre: string) => {
     setChartGenre(newGenre);
-    setIsOpen(false)
+    setIsOpen(false);
   };
 
   return (
@@ -109,7 +113,7 @@ export const Charts = () => {
           </div>
         </div>
       </div>
-      {selectedType === 'songs' && (
+      {selectedType === "songs" && (
         <div className="chartsListSongs">
           {isLoading && <p>Loading</p>}
           {isError && <p>Error</p>}
@@ -144,7 +148,7 @@ export const Charts = () => {
             )}
         </div>
       )}
-      {selectedType === 'albums' && (
+      {selectedType === "albums" && (
         <div className="chartListAlbums chartsListSongs">
           {albumError && <p>Error</p>}
           {albumLoading && <p>Loading</p>}
@@ -168,9 +172,9 @@ export const Charts = () => {
                 </Link>
               )
             )}
-        </div> 
+        </div>
       )}
-      {selectedType === 'artists' && (
+      {selectedType === "artists" && (
         <div className="chartListArtists chartsListSongs">
           {albumError && <p>Error</p>}
           {albumLoading && <p>Loading</p>}
@@ -180,20 +184,22 @@ export const Charts = () => {
                 elem: any, // eslint-disable-line
                 i: number
               ) => (
-                <div className="chartsElems" key={elem.item.id}>
-                  <p className="chartNum">{i + 1}</p>
-                  <img
-                    className="chartImg"
-                    src={elem.item.image_url}
-                    alt=""
-                  />
-                  <p className="chartArtist">{elem.item.name}</p>
-                </div>
+                <Link to={`/artist-details/${elem.item.id}`}>
+                  <div className="chartsElems" key={elem.item.id}>
+                    <p className="chartNum">{i + 1}</p>
+                    <img
+                      className="chartImg"
+                      src={elem.item.image_url}
+                      alt=""
+                    />
+                    <p className="chartArtist">{elem.item.name}</p>
+                  </div>
+                </Link>
               )
             )}
         </div>
       )}
-      {selectedType === 'referents' && (
+      {selectedType === "referents" && (
         <div className="chartListLyrics chartsListSongs">
           {errorLytics && <p>Error</p>}
           {albumLoading && <p>Loading</p>}
