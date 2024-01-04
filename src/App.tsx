@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { LoginPage } from "./Pages/Login/LoginPage";
 import { MainPage } from "./Pages/MainPage/MainPgae";
 import { SongDetails } from "./Pages/SongDetails/SongDetails";
+import { AlbumDetails } from "./Pages/AlbumDetails/AlbumDetails";
 
 const routerConfig = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ const routerConfig = createBrowserRouter([
   {
     path: '/song-details/:songId',
     element: <SongDetails />
-  }
+  },
+  {
+    path: '/album-details/:albumId',
+    element: <AlbumDetails />
+  },
 ])
 
 const App: React.FC = () => {

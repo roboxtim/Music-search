@@ -154,16 +154,18 @@ export const Charts = () => {
                 elem: any, // eslint-disable-line
                 i: number
               ) => (
-                <div className="chartsElems" key={elem.item.id}>
-                  <p className="chartNum">{i + 1}</p>
-                  <img
-                    className="chartImg"
-                    src={elem.item.cover_art_url}
-                    alt=""
-                  />
-                  <p className="chartTitle">{elem.item.name}</p>
-                  <p className="chartArtist">{elem.item.artist.name}</p>
-                </div>
+                <Link to={`/album-details/${elem.item.id}`}>
+                  <div className="chartsElems" key={elem.item.id}>
+                    <p className="chartNum">{i + 1}</p>
+                    <img
+                      className="chartImg"
+                      src={elem.item.cover_art_url}
+                      alt=""
+                    />
+                    <p className="chartTitle">{elem.item.name}</p>
+                    <p className="chartArtist">{elem.item.artist.name}</p>
+                  </div>
+                </Link>
               )
             )}
         </div> 

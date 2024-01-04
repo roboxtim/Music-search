@@ -21,6 +21,10 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
   }
 
+  ul,ol {
+    list-style: none;
+  }
+
   a {
     text-decoration: none;
     color: inherit;
