@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl, xHost, xKey } from "../../utils/baseUrl";
 import { IGetArtistResponse } from "../../models/artistDetails";
+import { IGetArtistLeaderboard } from "../../models/artistLeaderboard";
 
 export const artistDetailsApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -16,7 +17,12 @@ export const artistDetailsApi = createApi({
         url: `/artist/details/?id=${artistId}`
       })
     }),
+    getArtistLeaderboardById: build.query<IGetArtistLeaderboard, any>({// eslint-disable-line
+      query: (artistLeaderboardId: string) => ({
+        url: `/artist/leaderboard/?id=${artistLeaderboardId}`
+      })
+    }),
   }),
 });
 
-export const { useGetArtistByIdQuery } = artistDetailsApi;
+export const { useGetArtistByIdQuery, useGetArtistLeaderboardByIdQuery } = artistDetailsApi;
