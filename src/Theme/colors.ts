@@ -14,5 +14,7 @@ export const colors = {
   red: "#dc2020",
   green: "#36ac82",
   blue: "#399efa",
-  black: "#000"
+  black: "#000",
+  white: "#ffffff",
+  strowberryColor: "#ff1464",
 };
