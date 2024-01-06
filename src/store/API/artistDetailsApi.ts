@@ -2,6 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl, xHost, xKey } from "../../utils/baseUrl";
 import { IGetArtistResponse } from "../../models/artistDetails";
 import { IGetArtistLeaderboard } from "../../models/artistLeaderboard";
+import { IGetArtistSongsResponse } from "../../models/artistSongs";
+
+export interface IGetArtistSongsPayload {
+  artistId: string;
+  sort: string;
+  per_page: number;
+}
 
 export const artistDetailsApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -12,17 +19,33 @@ export const artistDetailsApi = createApi({
     },
   }),
   endpoints: (build) => ({
-    getArtistById: build.query<IGetArtistResponse, any>({ // eslint-disable-line
+    getArtistById: build.query<IGetArtistResponse, any>({// eslint-disable-line
       query: (artistId: string) => ({
-        url: `/artist/details/?id=${artistId}`
-      })
+        url: `/artist/details/?id=${artistId}`,
+      }),
     }),
     getArtistLeaderboardById: build.query<IGetArtistLeaderboard, any>({// eslint-disable-line
-      query: (artistLeaderboardId: string) => ({
-        url: `/artist/leaderboard/?id=${artistLeaderboardId}`
-      })
+      query: (artistId: string) => ({
+        url: `/artist/leaderboard/?id=${artistId}`,
+        params: {
+          per_page: 10,
+        },
+      }),
+    }),
+    geyArtistSongsById: build.query<IGetArtistSongsResponse, any>({//eslint-disable-line
+      query: (artistId: string) => ({
+        url: `artist/songs/?id=${artistId}`,
+        params: {
+          sort: 'popularity',
+          per_page: 10
+        }
+      }),
     }),
   }),
 });
 
-export const { useGetArtistByIdQuery, useGetArtistLeaderboardByIdQuery } = artistDetailsApi;
+export const {
+  useGetArtistByIdQuery,
+  useGetArtistLeaderboardByIdQuery,
+  useGeyArtistSongsByIdQuery,
+} = artistDetailsApi;
