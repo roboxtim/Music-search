@@ -17,4 +17,5 @@ export const colors = {
   black: "#000",
   white: "#ffffff",
   strowberryColor: "#ff1464",
+  yellow: "#ffff64",
 };

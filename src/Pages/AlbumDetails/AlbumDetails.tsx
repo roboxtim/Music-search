@@ -5,7 +5,7 @@ import {
   useGetAlbumByIdQuery,
   useGetAppearanceByIdQuery,
 } from "../../store/API/albumDetailsApi";
-import { StyledAlbumDetails } from "./AlbumDetails.style";
+import { StyledAlbumDetails, StyledComponentWithBackgroundImage } from "./AlbumDetails.style";
 import { Header } from "../../components/Ui/Header/Header";
 import { NavBar } from "../../components/Ui/nav/NavBar";
 import { Container } from "../../components/Ui/container/Container.style";
@@ -21,6 +21,8 @@ export const AlbumDetails = () => {
   const listData = appearanceData?.album_appearances;
   const maxLength = 435;
 
+  const imageUrl = `${albumInfoData?.header_image_url}`
+
   const handleText = () => {
     setIsFull(!isFull);
   };
@@ -30,6 +32,7 @@ export const AlbumDetails = () => {
       <Header />
       <NavBar />
       <StyledAlbumDetails>
+        <StyledComponentWithBackgroundImage imageUrl={imageUrl} />
         <div className="albumInfo">
           {/* <div className="albumInfoCover">
             <img src={albumInfoData?.custom_header_image_url} alt="" />

@@ -44,7 +44,10 @@ export const artistDetailsApi = createApi({
     }),
     getArtistAlbumsById: build.query<IGetArtistAlbumResponse, any>({//eslint-disable-line
       query: (artistId: string) => ({
-        url: `artist/albums/?id=${artistId}`
+        url: `artist/albums/?id=${artistId}`,
+        params: {
+          per_page: 6,
+        }
       })
     })
   }),

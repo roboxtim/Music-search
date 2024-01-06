@@ -1,5 +1,20 @@
 import styled from "styled-components";
 
+interface IImageUrl {
+  imageUrl: string;
+}
+
+export const StyledComponentWithBackgroundImage = styled.div<IImageUrl>`
+  width: 100%;
+  height: 288px;
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left 0 top -200px;
+  opacity: 0.9;
+  filter: blur(1px);
+`;
+
 export const StyledAlbumDetails = styled.div`
   display: flex;
   flex-direction: column;
