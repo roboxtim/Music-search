@@ -3,6 +3,7 @@ import { baseUrl, xHost, xKey } from "../../utils/baseUrl";
 import { IGetArtistResponse } from "../../models/artistDetails";
 import { IGetArtistLeaderboard } from "../../models/artistLeaderboard";
 import { IGetArtistSongsResponse } from "../../models/artistSongs";
+import { IGetArtistAlbumResponse } from "../../models/artistAlbums";
 
 export interface IGetArtistSongsPayload {
   artistId: string;
@@ -41,6 +42,11 @@ export const artistDetailsApi = createApi({
         }
       }),
     }),
+    getArtistAlbumsById: build.query<IGetArtistAlbumResponse, any>({//eslint-disable-line
+      query: (artistId: string) => ({
+        url: `artist/albums/?id=${artistId}`
+      })
+    })
   }),
 });
 
@@ -48,4 +54,5 @@ export const {
   useGetArtistByIdQuery,
   useGetArtistLeaderboardByIdQuery,
   useGeyArtistSongsByIdQuery,
+  useGetArtistAlbumsByIdQuery
 } = artistDetailsApi;
