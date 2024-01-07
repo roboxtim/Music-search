@@ -1,4 +1,4 @@
-import { StyledNavBar } from "./NavBar.style"
+import { StyledNavBar } from "./NavBar.style";
 
 export const NavBar = () => {
   return (
@@ -24,7 +24,6 @@ export const NavBar = () => {
       <a href="https://genius.com/new">
         <span>ADD SONG</span>
       </a>
-     
     </StyledNavBar>
-  )
-}
+  );
+};

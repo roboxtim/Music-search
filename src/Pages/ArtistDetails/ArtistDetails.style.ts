@@ -94,19 +94,107 @@ export const StyledArtistDetails = styled.div`
       }
     }
 
+    .btnFollow {
+      padding: 4px 8px;
+      margin: 12px 0 12px 171px;
+      border: 0.15rem solid ${(props) => props.theme.colors.black};
+      color: ${(props) => props.theme.colors.black};
+      cursor: pointer;
+    }
+
+    .artistDescription {
+      background-color: #fff;
+      padding: 16px;
+
+      h4 {
+        margin-bottom: 16px;
+      }
+
+      p {
+        line-height: 1.45;
+      }
+
+      span {
+        font-weight: 600;
+        color: ${(props) => props.theme.colors.lightPrime};
+        cursor: pointer;
+      }
+    }
+
+    h5 {
+      text-transform: uppercase;
+      margin: 16px 16px 8px;
+      color: #9a9a9a;
+    }
+
+    .artistLeaderboard {
+      background-color: #fff;
+      padding: 16px;
+
+      .artistLeaderboardList {
+        display: flex;
+        /* justify-content: space-between; */
+        border-bottom: 1.5px solid ${(props) => props.theme.colors.primeColor};
+        padding: 8px;
+        position: relative;
+
+        p:first-child {
+          flex-basis: 40px;
+          color: ${(props) => props.theme.colors.primeColor};
+          font-weight: 600;
+        }
+
+        div {
+          display: flex;
+          flex-basis: 240px;
+          gap: 8px;
+
+          img {
+            border-radius: 50%;
+          }
+
+          p:last-child {
+            color: ${(props) => props.theme.colors.gray};
+            font-size: 12px;
+            margin-top: 4px;
+          }
+
+        }
+
+        .attributionValue {
+          flex-basis: 88px;
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          color: ${(props) => props.theme.colors.primeColor};
+          font-weight: 550;
+        }
+      }
+    }
+
     .artistArt {
       .artistSongs {
         display: flex;
         flex-wrap: wrap;
-        width: 600px;
+        gap: 8px;
+        width: 530px;
+        margin: 20px;
 
         .songs {
           display: flex;
-          flex-basis: 300px;
+          flex-basis: 255px;
+          background-color: #fff;
+          gap: 6px;
 
           img {
             width: 75px;
           }
+
+          .songInfo {
+            margin-top: 8px;
+
+          }
+
         }
       }
     }
@@ -114,10 +202,14 @@ export const StyledArtistDetails = styled.div`
     .artistAlbums {
       display: flex;
       flex-wrap: wrap;
-      width: 480px;
+      gap: 24px;
+      width: 530px;
+      background-color: #fff;
+      padding: 16px;
+      margin: 20px;
 
       .artistAlbumsInfo {
-        width: 160px;
+        width: 150px;
         img {
           width: 150px;
         }

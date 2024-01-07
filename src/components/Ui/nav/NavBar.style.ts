@@ -12,10 +12,9 @@ export const StyledNavBar = styled.div`
     border-right: 1px solid;
     padding: 0 32px;
     color: white;
-    
   }
 
-  a:last-child span{
+  a:last-child span {
     border: 0;
   }
-`
+`;

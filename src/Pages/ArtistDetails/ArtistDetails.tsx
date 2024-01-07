@@ -57,6 +57,7 @@ export const ArtistDetails = () => {
             <p>All Activity</p>
           </div>
         </div>
+
         <div className="container">
           <div className="artisContainerInfo">
             <div className="artistInfo">
@@ -98,7 +99,7 @@ export const ArtistDetails = () => {
               </div>
             </div>
 
-            <button>Follow</button>
+            <button className="btnFollow">Follow</button>
 
             <div className="artistDescription">
               <Heading
@@ -107,8 +108,10 @@ export const ArtistDetails = () => {
               />
               {isFull ? (
                 <div>
-                  <p>{artistData?.description_preview}</p>
-                  <button onClick={handleText}>Less</button>
+                  <p>
+                    {artistData?.description_preview}
+                    <span onClick={handleText}> Read less</span>
+                  </p>
                 </div>
               ) : (
                 <div>
@@ -119,13 +122,15 @@ export const ArtistDetails = () => {
                           maxLength
                         )}...`
                       : artistData?.description_preview}
+                    <span onClick={handleText}> Read more</span>
                   </p>
-                  {artistData?.description_preview.length > maxLength && (
-                    <button onClick={handleText}>More</button>
-                  )}
                 </div>
               )}
             </div>
+            <Heading
+              headingText={`top ${artistData?.name} scholars`}
+              headingType="h5"
+            />
             <div className="artistLeaderboard">
               {artistDataLeaderboardInfo &&
                 artistDataLeaderboardInfo.map(
@@ -133,12 +138,14 @@ export const ArtistDetails = () => {
                     elem: any, //eslint-disable-line
                     i: number
                   ) => (
-                    <div key={elem.user.id}>
+                    <div className="artistLeaderboardList" key={elem.user.id}>
                       <p>{i + 1}</p>
-                      <img src={elem.user.avatar.tiny.url} alt="" />
-                      <p>{elem.user.name}</p>
-                      <p>{elem.user.iq}</p>
-                      <p>{elem.user.attribution_value}</p>
+                      <div>
+                        <img src={elem.user.avatar.tiny.url} alt="" />
+                        <p>{elem.user.name}</p>
+                        <p>{elem.user.iq}</p>
+                      </div>
+                      <p className="attributionValue">{elem.attribution_value}</p>
                     </div>
                   )
                 )}
@@ -148,7 +155,8 @@ export const ArtistDetails = () => {
           <div className="artistArt">
             <Heading
               headingText={`popular ${artistData?.name} songs`}
-              headingType="h4"
+              headingType="h5"
+              className="artsitArtHeading"
             />
             <div className="artistSongs">
               {artistSongsData &&
@@ -160,7 +168,7 @@ export const ArtistDetails = () => {
                       <img src={elem.song_art_image_url} alt="" />
                       <div className="songInfo">
                         <Heading headingText={elem.title} headingType="h4" />
-                        <p>{elem.artist_names}</p>
+                        <p>{elem.primary_artist.name}</p>
                         <p>
                           {elem.stats.pageviews > 1000000
                             ? (elem.stats.pageviews / 1000000)
@@ -178,17 +186,21 @@ export const ArtistDetails = () => {
 
             <Heading
               headingText={`popular ${artistData?.name} albums`}
-              headingType="h4"
+              headingType="h5"
             />
             <div className="artistAlbums">
               {artistAlbumData &&
-                artistAlbumData.map((elem: any) => ( //eslint-disable-line
-                  <div className="artistAlbumsInfo">
-                    <img src={elem.cover_art_url} alt="" />
-                    <p>{elem.name}</p>
-                    <p>{elem.release_date_components.year}</p>
-                  </div>
-                ))}
+                artistAlbumData.map(
+                  (
+                    elem: any //eslint-disable-line
+                  ) => (
+                    <div className="artistAlbumsInfo">
+                      <img src={elem.cover_art_url} alt="" />
+                      <p>{elem.name}</p>
+                      <p>{elem.release_date_components.year}</p>
+                    </div>
+                  )
+                )}
             </div>
           </div>
         </div>

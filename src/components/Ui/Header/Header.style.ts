@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const StyledHeader = styled.div`
-  position: fixed;
   position: relative;
   width: 100%;
   top: 0;
@@ -11,6 +10,7 @@ export const StyledHeader = styled.div`
   background: rgb(255, 255, 100);
   display: flex;
   justify-content: space-between;
+  transition: ease-in-out 0.3s;
 
   .headerInput {
     align-self: center;
@@ -21,6 +21,11 @@ export const StyledHeader = styled.div`
     padding: 8px 12px;
     width: 200px;
     border: 0;
+    transition: ease-in-out 0.3s;
+  }
+
+  .headerInput input::placeholder {
+    transition: ease-in-out 0.3s;
   }
 
   .headerImg {
@@ -74,5 +79,10 @@ export const StyledHeader = styled.div`
         margin-bottom: 12px;
       }
     }
+  }
+
+  ul.dark {
+    background: black;
+    color: white;
   }
 `;

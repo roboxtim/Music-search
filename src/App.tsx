@@ -5,36 +5,39 @@ import { MainPage } from "./Pages/MainPage/MainPgae";
 import { SongDetails } from "./Pages/SongDetails/SongDetails";
 import { AlbumDetails } from "./Pages/AlbumDetails/AlbumDetails";
 import { ArtistDetails } from "./Pages/ArtistDetails/ArtistDetails";
+import { ThemeProvider } from "./contexts/themeProvider";
 
 const routerConfig = createBrowserRouter([
   {
-    path: '/',
-    element: <LoginPage /> 
+    path: "/",
+    element: <LoginPage />,
   },
   {
-    path: '/main',
-    element: <MainPage /> 
+    path: "/main",
+    element: <MainPage />,
   },
   {
-    path: '/song-details/:songId',
-    element: <SongDetails />
+    path: "/song-details/:songId",
+    element: <SongDetails />,
   },
   {
-    path: '/album-details/:albumId',
-    element: <AlbumDetails />
+    path: "/album-details/:albumId",
+    element: <AlbumDetails />,
   },
   {
-    path: '/artist-details/:artistId',
-    element: <ArtistDetails />
+    path: "/artist-details/:artistId",
+    element: <ArtistDetails />,
   },
-])
+]);
 
 const App: React.FC = () => {
-  return (  
-    <div className="App">
-      <RouterProvider router={routerConfig} />
-    </div>
+  return (
+    <ThemeProvider>
+      <div className="App">
+        <RouterProvider router={routerConfig} />
+      </div>
+    </ThemeProvider>
   );
 };
 
-export default App
+export default App;

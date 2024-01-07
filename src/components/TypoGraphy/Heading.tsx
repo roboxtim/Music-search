@@ -2,6 +2,7 @@ import React from "react";
 
 type HeadingProps = {
   headingText: string;
+  className?: string;
   headingType?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 };
 
