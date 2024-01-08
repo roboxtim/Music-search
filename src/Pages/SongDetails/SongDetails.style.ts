@@ -1,146 +1,106 @@
 import styled from "styled-components";
 
+const getRandomColor = () => {
+  const color = () => Math.floor(Math.random() * 256);
+  return `rgb(${color()}, ${color()}, ${color()})`;
+};
+
+export const StyledComponentWithBackgroundImage = styled.div`
+  width: 100%;
+  height: 320px;
+  background: linear-gradient(to top, ${getRandomColor()}, ${getRandomColor()});
+`;
+
 export const StyledSongDetails = styled.div`
-  /* .songInfo {
-    display: flex;
-    margin-top: 36px;
-
-    .songImg {
-      width: 240px;
-    }
-  } */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  align-items: center;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  margin-bottom: 20px;
-
   .songInfo {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    gap: 40px;
+    margin-top: -280px;
+    margin-left: 200px;
+    position: relative;
+    z-index: 1;
+    color: black;
 
-    .songImg {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-right: 20px;
+    img {
+      width: 340px;
     }
 
-    .songName {
-      h2 {
-        margin-bottom: 5px;
-        font-size: 24px;
+    .songDetails {
+      .songName {
+        h2 {
+          font-size: 28px;
+          margin-bottom: 12px;
+        }
+    
+        h3 {
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
+
+        .songProduction {
+          p:last-child {
+            margin: 8px 0 20px;
+            font-size: 20px;
+          }
+        }
       }
 
-      h3 {
-        margin-bottom: 5px;
-        font-size: 20px;
-        color: #888;
+      .songDescription {
+        width: 400px;
+        p {
+          font-size: 18px;
+          line-height: 140%;
+        }
       }
 
-      h4 {
-        margin-bottom: 5px;
-        font-size: 18px;
-        color: #444;
+      .songViews {
+        margin-top: 32px;
+
+        span {
+          margin-right: 12px;
+        }
       }
-
-      p {
-        margin: 5px 0;
-        font-size: 16px;
-        color: #666;
-      }
-    }
-  }
-
-  .songViews {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    color: #888;
-
-    p {
-      margin: 5px 0;
-      font-size: 16px;
     }
   }
 
   .lyrics {
-    width: 100%;
-    margin-top: 20px;
-    border-top: 1px solid #eee;
-    padding-top: 20px;
-
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-      color: #333;
-      margin-bottom: 10px;
-    }
+    margin-top: -60px;
+    padding: 120px 0 40px 200px;
+    font-size: 20px;
+    cursor: none;
+    transition: ease-in-out 0.3s;
 
     a {
-      color: #007bff;
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  } */
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 20px;
-  background-color: #f9f9f9;
-
-  .songInfo {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-
-    .songImg {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin-right: 20px;
-    }
-
-    .songName {
-      flex: 1;
-
-      h2 {
-        font-size: 24px;
-        margin-bottom: 5px;
-      }
-      h3 {
-        font-size: 18px;
-        margin-bottom: 5px;
-        color: #555;
-      }
-      h4 {
-        font-size: 16px;
-        margin-bottom: 5px;
-        color: #777;
-      }
-      p {
-        margin-bottom: 5px;
-      }
+      transition: ease-in-out 0.3s;
     }
   }
 
-  .lyrics {
-    .lyricsText {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #333;
+  #songDescriptionAbout {
+    background: linear-gradient(to top, ${getRandomColor()}, ${getRandomColor()});
+    color: black;
+    padding: 40px 200px;
+
+    h2 {
+      font-size: 80px;
+      margin-left: 250px;
+    }
+
+    p {
+      width: 715px;
+      font-size: 24px;
+      line-height: 1.45;
+      text-align: left;
+    }
+  }
+
+  .container.dark {
+    .lyrics {
+      background: black;
+      transition: ease-in-out 0.3s;
+      a {
+        color: white;
+        transition: ease-in-out 0.3s;
+      }
     }
   }
 `;

@@ -5,7 +5,10 @@ import {
   useGetAlbumByIdQuery,
   useGetAppearanceByIdQuery,
 } from "../../store/API/albumDetailsApi";
-import { StyledAlbumDetails, StyledComponentWithBackgroundImage } from "./AlbumDetails.style";
+import {
+  StyledAlbumDetails,
+  StyledComponentWithBackgroundImage,
+} from "./AlbumDetails.style";
 import { Header } from "../../components/Ui/Header/Header";
 import { NavBar } from "../../components/Ui/nav/NavBar";
 import { Container } from "../../components/Ui/container/Container.style";
@@ -21,7 +24,7 @@ export const AlbumDetails = () => {
   const listData = appearanceData?.album_appearances;
   const maxLength = 435;
 
-  const imageUrl = `${albumInfoData?.header_image_url}`
+  const imageUrl = `${albumInfoData?.header_image_url}`;
 
   const handleText = () => {
     setIsFull(!isFull);
@@ -34,14 +37,7 @@ export const AlbumDetails = () => {
       <StyledAlbumDetails>
         <StyledComponentWithBackgroundImage imageUrl={imageUrl} />
         <div className="albumInfo">
-          {/* <div className="albumInfoCover">
-            <img src={albumInfoData?.custom_header_image_url} alt="" />
-          </div> */}
-          <img
-            className="albumImg"
-            src={albumInfoData?.cover_art_url}
-            alt=""
-          />
+          <img className="albumImg" src={albumInfoData?.cover_art_url} alt="" />
           <div className="albumDescription">
             <p>{albumInfoData?._type}</p>
             <Heading headingText={albumInfoData?.name} headingType="h2" />
@@ -52,8 +48,16 @@ export const AlbumDetails = () => {
             <p>Released {albumInfoData?.release_date_for_display}</p>
           </div>
           <div className="chartViewContainer">
-            <svg className="chartViewIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 15.45"><path d="M11 2c4 0 7.26 3.85 8.6 5.72-1.34 1.87-4.6 5.73-8.6 5.73S3.74 9.61 2.4 7.73C3.74 5.86 7 2 11 2m0-2C4.45 0 0 7.73 0 7.73s4.45 7.73 11 7.73 11-7.73 11-7.73S17.55 0 11 0z"></path><path d="M11 5a2.73 2.73 0 1 1-2.73 2.73A2.73 2.73 0 0 1 11 5m0-2a4.73 4.73 0 1 0 4.73 4.73A4.73 4.73 0 0 0 11 3z"></path></svg>
-            <p className="chartView">
+            <svg
+              className="chartViewIcon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 22 8.45"
+              fill="gray"
+            >
+              <path d="M11 2c4 0 7.26 3.85 8.6 5.72-1.34 1.87-4.6 5.73-8.6 5.73S3.74 9.61 2.4 7.73C3.74 5.86 7 2 11 2m0-2C4.45 0 0 7.73 0 7.73s4.45 7.73 11 7.73 11-7.73 11-7.73S17.55 0 11 0z"></path>
+              <path d="M11 5a2.73 2.73 0 1 1-2.73 2.73A2.73 2.73 0 0 1 11 5m0-2a4.73 4.73 0 1 0 4.73 4.73A4.73 4.73 0 0 0 11 3z"></path>
+            </svg>
+            <span className="chartView">
               {albumInfoData?.song_pageviews > 1000000
                 ? (albumInfoData?.song_pageviews / 10000)
                     .toFixed(1)
@@ -61,18 +65,19 @@ export const AlbumDetails = () => {
                 : (albumInfoData?.song_pageviews / 1000)
                     .toFixed(1)
                     .replace(/\.0+$/, "") + "k"}
-            </p>
+            </span>
           </div>
         </div>
         <div className="albumList">
           <div className="albumTracks">
+            <Heading headingText="music tracklist" headingType="h3" />
             {listData &&
               listData.map(
                 (
                   elem: any //eslint-disable-line
                 ) => (
                   <div className="albumTracksInfo" key={elem.song.id}>
-                    <div className="albumTracksTitle">{elem.song.title} </div>
+                    <p className="albumTracksTitle">{elem.song.title} <span>lyrics</span></p>
                     <div className="albumTracksViews">
                       {elem.song.stats.pageviews > 1000000
                         ? (elem.song.stats.pageviews / 1000000)
@@ -91,12 +96,13 @@ export const AlbumDetails = () => {
               headingText={`About "${albumInfoData?.name}"`}
               headingType="h5"
             />
-            {/* <p>{albumInfoData?.description_preview}</p> */}
             <div>
               {isFull ? (
                 <div>
-                  <p>{albumInfoData?.description_preview}</p>
-                  <button onClick={handleText}>Less</button>
+                  <p>
+                    {albumInfoData?.description_preview}
+                    <span onClick={handleText}>Less</span>
+                  </p>
                 </div>
               ) : (
                 <div>
@@ -107,10 +113,8 @@ export const AlbumDetails = () => {
                           maxLength
                         )}...`
                       : albumInfoData?.description_preview}
+                    <span onClick={handleText}>More</span>
                   </p>
-                  {albumInfoData?.description_preview.length > maxLength && (
-                    <button onClick={handleText}>More</button>
-                  )}
                 </div>
               )}
             </div>

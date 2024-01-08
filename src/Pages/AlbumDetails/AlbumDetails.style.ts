@@ -6,51 +6,46 @@ interface IImageUrl {
 
 export const StyledComponentWithBackgroundImage = styled.div<IImageUrl>`
   width: 100%;
-  height: 288px;
+  height: 360px;
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: left 0 top -200px;
+  background-position: left 0 top -360px;
   opacity: 0.9;
-  filter: blur(1px);
+  filter: blur(2px);
+
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); 
+  }
 `;
 
 export const StyledAlbumDetails = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
-
-  
+  /* align-items: center; */
 
   .albumInfo {
     display: flex;
-    gap: 80px;
-
-    .albumInfoCover {
-      position: absolute; 
-      top: -330px;
-      left: 120px;
-      overflow: hidden; 
-      z-index: -1;
-
-      img {
-        width: 100vw;
-        /* height: 100%; */
-        opacity: 0.7; 
-        transition: opacity 0.3s ease; 
-      }
-    }
+    gap: 40px;
+    margin: -300px 0 0 400px;
+    position: relative;
+    z-index: 1;
 
     .albumImg {
       width: 280px;
     }
 
     .albumDescription {
-      align-self: center;
+      margin-top: 20px;
+      color: white;
 
       p:first-child {
-        font-size: 12px;
+        font-size: 16px;
+        color: ${(props) => props.theme.colors.yellow};
         text-transform: uppercase;
         margin-bottom: 12px;
       }
@@ -64,12 +59,12 @@ export const StyledAlbumDetails = styled.div`
       }
       p:last-child {
         font-size: 16px;
+        color: gray;
       }
     }
 
     .chartViewContainer {
-      display: flex;
-      margin-top: 80px;
+      margin-left: 300px;
 
       .chartViewIcon {
         width: 16px;
@@ -77,27 +72,50 @@ export const StyledAlbumDetails = styled.div`
         margin-right: 4px;
       }
       .chartView {
-        font-size: 12px;
+        font-size: 16px;
+        color: gray;
       }
     }
   }
 
   .albumList {
     display: flex;
-    gap: 120px;
-    margin-top: 40px;
+    gap: 40px;
+    padding: 40px 365px;
     .albumTracks {
+      h3 {
+        text-transform: uppercase;
+        color: gray;
+      }
       .albumTracksInfo {
         display: flex;
         justify-content: space-between;
         gap: 160px;
         border-bottom: 1px solid ${(props) => props.theme.colors.gray};
 
-        .albumTracksTitle,
+        p {
+          font-weight: 600;
+          width: 200px;
+          padding: 16px;
+
+
+          span {
+            color: gray;
+            text-transform: capitalize;
+            font-weight: 400;
+          }
+        }
+
         .albumTracksViews {
           padding: 16px;
         }
       }
+    }
+
+    .albumTracksDiscription {
+      background: #fff;
+      padding: 24px;
+      height: 100%;
     }
   }
 `;

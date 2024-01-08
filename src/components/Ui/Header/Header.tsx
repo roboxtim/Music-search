@@ -97,6 +97,9 @@ export const Header = () => {
           </svg>
         </div>
       </Link>
+      <Link to={'/favorites'}>
+        Fav
+      </Link>
       <div className="userInfo">
         <img className="userImg" src="./public/img/user.png" alt="User img" />
         {/* <Heading headingText="Alex" headingType="h3" /> */}

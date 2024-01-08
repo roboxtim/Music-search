@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   useGetSongLyricsQuery,
@@ -7,9 +7,13 @@ import {
 import { Container } from "../../components/Ui/container/Container.style";
 import { Header } from "../../components/Ui/Header/Header";
 import { NavBar } from "../../components/Ui/nav/NavBar";
-import { StyledSongDetails } from "./SongDetails.style";
+import {
+  StyledComponentWithBackgroundImage,
+  StyledSongDetails,
+} from "./SongDetails.style";
 import { Heading } from "../../components/TypoGraphy/Heading";
 import { SongLyrics } from "../../components/TypoGraphy/SongLyrics";
+import { ThemeContext, themes } from "../../contexts/themeContext";
 
 export const SongDetails = () => {
   const { songId } = useParams();
@@ -25,45 +29,72 @@ export const SongDetails = () => {
     }
   }, [songId]);
 
+  const { theme } = useContext(ThemeContext)
+
   return (
     <>
       <Header />
       <NavBar />
       <Container>
+        <StyledComponentWithBackgroundImage />
         <StyledSongDetails>
-          <div className="songInfo">
-            <img
-              className="songImg"
-              src={dataSong?.custom_song_art_image_url}
-              alt="Song image"
-            />
-            <div className="songName">
-              <Heading headingText={dataSong?.title} headingType="h2" />
-              <Heading headingText={dataSong?.artist_names} headingType="h3" />
-              <Heading headingText="Produced by" headingType="h4" />
-              <p>
-                {dataSong?.producer_artists.length > 0
-                  ? dataSong.producer_artists.length === 1
-                    ? dataSong.producer_artists[0].name
-                    : `${dataSong.producer_artists[0].name} & ${dataSong.producer_artists[1].name}`
-                  : "No producer information"}
-              </p>
+          <div className={`container ${theme === themes.dark && "dark"}`}>
+            <div className="songInfo">
+              <img
+                className="songImg"
+                src={dataSong?.custom_song_art_image_url}
+                alt="Song image"
+              />
+              <div className="songDetails">
+                <div className="songName">
+                  <Heading headingText={dataSong?.title} headingType="h2" />
+                  <Heading
+                    headingText={dataSong?.artist_names}
+                    headingType="h3"
+                  />
+                  <div className="songProduction">
+                    <p>Produced by</p>
+                    <p>
+                      {dataSong?.producer_artists.length > 0
+                        ? dataSong.producer_artists.length === 1
+                          ? dataSong.producer_artists[0].name
+                          : `${dataSong.producer_artists[0].name} & ${dataSong.producer_artists[1].name}`
+                        : "No producer information"}
+                    </p>
+                  </div>
+                </div>
+                <div className="songDescription">
+                  <p>
+                    {dataSong?.description_preview.length > 35 &&
+                      dataSong?.description_preview.substring(0, 135)}
+                    <a href="#songDescriptionAbout"><span>... Read more</span></a>
+                  </p>
+                </div>
+                <div className="songViews">
+                  <span>
+                    {dataSong?.release_date_with_abbreviated_month_for_display}
+                  </span>
+                  <span>
+                    {dataSong?.stats.pageviews > 1000000
+                      ? (dataSong?.stats.pageviews / 1000000)
+                          .toFixed(1)
+                          .replace(/\.0+$/, "") + "M"
+                      : (dataSong?.stats.pageviews / 100000)
+                          .toFixed(1)
+                          .replace(/\.0+$/, "") + "k"}
+                  </span>
+                </div>
+              </div>
+
+              <button type="button">Add to favorites</button>
             </div>
-          </div>
-          <div className="songViews">
-            <p>{dataSong?.release_date_with_abbreviated_month_for_display}</p>
-            <p>
-              {dataSong?.stats.pageviews > 1000000
-                ? (dataSong?.stats.pageviews / 1000000)
-                    .toFixed(1)
-                    .replace(/\.0+$/, "") + "M"
-                : (dataSong?.stats.pageviews / 100000)
-                    .toFixed(1)
-                    .replace(/\.0+$/, "") + "k"}
-            </p>
-          </div>
-          <div className="lyrics">
-            <SongLyrics lyricsHTML={lyricsData?.lyrics.body.html} />
+            <div className="lyrics">
+              <SongLyrics lyricsHTML={lyricsData?.lyrics.body.html} />
+            </div>
+            <div id="songDescriptionAbout">
+              <Heading headingText="About" headingType="h2" />
+              <p>{dataSong?.description_preview}</p>
+            </div>
           </div>
         </StyledSongDetails>
       </Container>

@@ -6,6 +6,7 @@ import { SongDetails } from "./Pages/SongDetails/SongDetails";
 import { AlbumDetails } from "./Pages/AlbumDetails/AlbumDetails";
 import { ArtistDetails } from "./Pages/ArtistDetails/ArtistDetails";
 import { ThemeProvider } from "./contexts/themeProvider";
+import { Favorites } from "./Pages/Favorites/Favorites";
 
 const routerConfig = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const routerConfig = createBrowserRouter([
   {
     path: "/artist-details/:artistId",
     element: <ArtistDetails />,
+  },
+  {
+    path: "/favorites",
+    element: <Favorites />,
   },
 ]);
 
