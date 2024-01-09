@@ -15,12 +15,12 @@ export const Header = () => {
     refetchOnFocus: true,
   });
 
-  const searchResult = searchData?.hits;
-  console.log(user);
+  const searchResult = searchData?.sections;
+  const searchValueBoolean = Boolean(searchValue)
 
   useEffect(() => {
-    setDropDown(searchResult?.length > 0);
-  }, [searchResult]);
+    setDropDown(searchValueBoolean);
+  }, [searchValueBoolean]);
 
   const { theme } = useContext(ThemeContext);
 
@@ -36,27 +36,36 @@ export const Header = () => {
         />
         <div className="searchResult">
           {dropDown && (
-            <ul className={`${theme === themes.dark && "dark"}`}>
+            <div className={`${theme === themes.dark && "dark"}`}>
               <Heading headingText="Search result" headingType="h3" />
-              {searchResult &&
-                searchResult.map(
-                  (
-                    elem: any // eslint-disable-line
-                  ) => (
-                    <li key={elem.result.id}>
-                      <img
-                        className="songImg"
-                        src={elem.result.song_art_image_url}
-                        alt=""
-                      />
-                      <div className="songInfo">
-                        <p className="songName">{elem.result.title}</p>
-                        <p className="songArtist">{elem.result.artist_names}</p>
-                      </div>
-                    </li>
-                  )
-                )}
-            </ul>
+              {searchResult.map((elem: any) => {
+                if (elem.type === 'top_hit') {
+                  return elem.hits.map((hit: any) => 
+                  hit.index === 'song' && (
+                    <div key={hit.result.id}>
+                      <p>Top result</p>
+                      <p>{hit.result.title}</p>
+                    </div>
+                  ))
+                } else if (elem.type === 'song') {
+                  return elem.hits.map((hit: any) => (
+                    <p key={hit.result.id}>{hit.result.title}</p>
+                  ));
+                } else if (elem.type === 'lyric') {
+                  return elem.hits.map((hit: any) => (
+                    <p key={hit.result.id}>{hit.result.title}</p>
+                  ))
+                } else if (elem.type === 'artist') {
+                  return elem.hits.map((hit: any) => (
+                    <p key={hit.result.id}>{hit.result.name}</p>
+                  ))
+                } else if (elem.type === 'album') {
+                  return elem.hits.map((hit: any) => (
+                    <p key={hit.result.id}>{hit.result.name}</p>
+                  ))
+                }
+              })}
+            </div>
           )}
         </div>
       </div>
