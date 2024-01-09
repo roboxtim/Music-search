@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   useGetSongLyricsQuery,
@@ -16,6 +16,7 @@ import { SongLyrics } from "../../components/TypoGraphy/SongLyrics";
 import { ThemeContext, themes } from "../../contexts/themeContext";
 
 export const SongDetails = () => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const { songId } = useParams();
   const [fetchTriger, { data }] = useLazyGetSongByIdQuery();
   const { data: songLyricsData } = useGetSongLyricsQuery(songId);
@@ -29,7 +30,17 @@ export const SongDetails = () => {
     }
   }, [songId]);
 
-  const { theme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
+
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]"!);
+    
+    const updatedFavorites = isFavorite
+      ? favorites.filter((favId: string) => favId !== dataSong?.id)
+      : [...favorites, dataSong];
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
 
   return (
     <>
@@ -67,7 +78,9 @@ export const SongDetails = () => {
                   <p>
                     {dataSong?.description_preview.length > 35 &&
                       dataSong?.description_preview.substring(0, 135)}
-                    <a href="#songDescriptionAbout"><span>... Read more</span></a>
+                    <a href="#songDescriptionAbout">
+                      <span>... Read more</span>
+                    </a>
                   </p>
                 </div>
                 <div className="songViews">
@@ -86,7 +99,9 @@ export const SongDetails = () => {
                 </div>
               </div>
 
-              <button type="button">Add to favorites</button>
+              <button onClick={handleFavorite} type="button">
+                {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+              </button>
             </div>
             <div className="lyrics">
               <SongLyrics lyricsHTML={lyricsData?.lyrics.body.html} />
