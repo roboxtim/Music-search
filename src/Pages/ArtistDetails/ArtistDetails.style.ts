@@ -42,6 +42,19 @@ export const StyledArtistDetails = styled.div`
         color: ${(props) => props.theme.colors.strowberryColor};
       }
     }
+
+    .btn {
+      margin-top: 180px;
+      button {
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      button:hover {
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        transition: .9s ease;
+      }
+    }
   }
 
   .container {

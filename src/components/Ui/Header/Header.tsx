@@ -16,19 +16,16 @@ export const Header = () => {
   });
 
   const searchResult = searchData?.hits;
-  console.log(searchResult);
+  console.log(user);
 
   useEffect(() => {
     setDropDown(searchResult?.length > 0);
   }, [searchResult]);
 
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <StyledHeader>
-      <button type="button" onClick={toggleTheme}>
-        theme
-      </button>
       <div className="headerInput">
         <Input
           placeholder="Search song"
@@ -97,12 +94,8 @@ export const Header = () => {
           </svg>
         </div>
       </Link>
-      <Link to={'/favorites'}>
-        Fav
-      </Link>
       <div className="userInfo">
         <img className="userImg" src="./public/img/user.png" alt="User img" />
-        {/* <Heading headingText="Alex" headingType="h3" /> */}
         <h3>{user?.name}</h3>
       </div>
     </StyledHeader>

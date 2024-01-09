@@ -51,7 +51,6 @@ export const LoginPage = () => {
   const user = useTypedSelector((state) => state.userSlice.user);
 
   const onLoginSubmit: SubmitHandler<LoginPageForm> = () => {
-    // console.log("Data: ", data);
     dispatch(changeUser(mockuser));
   };
 

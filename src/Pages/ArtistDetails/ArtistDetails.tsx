@@ -17,6 +17,7 @@ import {
 import { Heading } from "../../components/TypoGraphy/Heading";
 
 export const ArtistDetails = () => {
+  const [isFavorite, setIsFavorite] = useState(false)
   const { artistId } = useParams();
   const [isFull, setIsFull] = useState(false);
 
@@ -39,6 +40,16 @@ export const ArtistDetails = () => {
     setIsFull(!isFull);
   };
 
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]"!);
+    
+    const updatedFavorites = isFavorite && favorites !== artistData?.id
+      ? favorites.filter((favId: string) => favId !== artistData?.id)
+      : [...favorites, artistData];
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+
   return (
     <Container>
       <Header />
@@ -55,6 +66,9 @@ export const ArtistDetails = () => {
               Followers
             </p>
             <p>All Activity</p>
+          </div>
+          <div className="btn">
+            <button onClick={handleFavorite} type="button">Add to favorite</button>
           </div>
         </div>
 

@@ -67,6 +67,24 @@ export const Favorites = () => {
                 ) : ''
               ))}
             </div>
+
+            <div className="dataArtist">
+              <Heading headingText="Favorite artist" />
+              {favSongs.map((elem: any) => ( //eslint-disable-line
+                elem._type === 'artist' ? (
+                  <Link to={`/artist-details/${elem.id}`}>
+                    <div className="chartsElems" key={elem.id}>
+                      <img
+                        className="chartImg"
+                        src={elem.image_url}
+                        alt=""
+                      />
+                      <p className="chartArtist">{elem.name}</p>
+                    </div>
+                  </Link>
+                ) : ''
+              ))}
+            </div>
           </div>
         </StyledFavorites>
       </Container>

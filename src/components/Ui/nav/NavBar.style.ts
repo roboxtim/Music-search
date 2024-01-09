@@ -14,7 +14,21 @@ export const StyledNavBar = styled.div`
     color: white;
   }
 
-  a:last-child span {
-    border: 0;
+  a:first-child {
+    margin-right: 12px;
+    border-right: 0;
+    border-right: 1px solid;
+    padding: 0 32px;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  a:last-child {
+    margin-right: 12px;
+    border-right: 1px solid;
+    border-right: 0;
+    padding: 0 32px;
+    color: white;
+    text-transform: uppercase;
   }
 `;
