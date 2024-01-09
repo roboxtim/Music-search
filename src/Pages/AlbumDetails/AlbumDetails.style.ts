@@ -31,7 +31,7 @@ export const StyledAlbumDetails = styled.div`
   .albumInfo {
     display: flex;
     gap: 40px;
-    margin: -300px 0 0 400px;
+    margin: -300px 0 0 300px;
     position: relative;
     z-index: 1;
 
@@ -40,6 +40,7 @@ export const StyledAlbumDetails = styled.div`
     }
 
     .albumDescription {
+      width: 400px;
       margin-top: 20px;
       color: white;
 
@@ -64,7 +65,7 @@ export const StyledAlbumDetails = styled.div`
     }
 
     .chartViewContainer {
-      margin-left: 300px;
+      margin-left: 200px;
 
       .chartViewIcon {
         width: 16px;
@@ -74,6 +75,18 @@ export const StyledAlbumDetails = styled.div`
       .chartView {
         font-size: 16px;
         color: gray;
+      }
+    }
+
+    .albumInfoBtn {
+      button {
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      button:hover {
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        transition: .9s ease;
       }
     }
   }

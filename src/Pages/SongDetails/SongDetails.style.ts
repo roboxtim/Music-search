@@ -7,7 +7,7 @@ const getRandomColor = () => {
 
 export const StyledComponentWithBackgroundImage = styled.div`
   width: 100%;
-  height: 320px;
+  height: 360px;
   background: linear-gradient(to top, ${getRandomColor()}, ${getRandomColor()});
 `;
 
@@ -15,7 +15,7 @@ export const StyledSongDetails = styled.div`
   .songInfo {
     display: flex;
     gap: 40px;
-    margin-top: -280px;
+    margin-top: -320px;
     margin-left: 200px;
     position: relative;
     z-index: 1;
@@ -60,6 +60,19 @@ export const StyledSongDetails = styled.div`
           margin-right: 12px;
         }
       }
+    }
+    .songInfoBtn {
+      margin-left: 100px;
+      button {
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      button:hover {
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        transition: .9s ease;
+      }
+
     }
   }
 

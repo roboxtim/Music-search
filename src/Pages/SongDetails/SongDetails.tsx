@@ -36,7 +36,7 @@ export const SongDetails = () => {
     setIsFavorite(!isFavorite);
     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]"!);
     
-    const updatedFavorites = isFavorite
+    const updatedFavorites = isFavorite && favorites !== dataSong?.id
       ? favorites.filter((favId: string) => favId !== dataSong?.id)
       : [...favorites, dataSong];
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
@@ -98,10 +98,11 @@ export const SongDetails = () => {
                   </span>
                 </div>
               </div>
-
-              <button onClick={handleFavorite} type="button">
-                {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-              </button>
+              <div className="songInfoBtn">
+                <button onClick={handleFavorite} type="button">
+                  Add to favorite
+                </button>
+              </div>
             </div>
             <div className="lyrics">
               <SongLyrics lyricsHTML={lyricsData?.lyrics.body.html} />

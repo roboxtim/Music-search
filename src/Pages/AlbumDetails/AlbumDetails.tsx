@@ -16,6 +16,7 @@ import { Heading } from "../../components/TypoGraphy/Heading";
 
 export const AlbumDetails = () => {
   const [isFull, setIsFull] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false)
   const { albumId } = useParams();
   const { data: albumData } = useGetAlbumByIdQuery(albumId);
   const { data: appearanceData } = useGetAppearanceByIdQuery(albumId);
@@ -28,6 +29,16 @@ export const AlbumDetails = () => {
 
   const handleText = () => {
     setIsFull(!isFull);
+  };
+
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]"!);
+    
+    const updatedFavorites = isFavorite && favorites !== albumInfoData?.id
+      ? favorites.filter((favId: string) => favId !== albumInfoData?.id)
+      : [...favorites, albumInfoData];
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
   return (
@@ -66,6 +77,9 @@ export const AlbumDetails = () => {
                     .toFixed(1)
                     .replace(/\.0+$/, "") + "k"}
             </span>
+          </div>
+          <div className="albumInfoBtn">
+            <button onClick={handleFavorite} type="button">Add to favorite</button>
           </div>
         </div>
         <div className="albumList">
