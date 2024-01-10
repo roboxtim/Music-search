@@ -127,7 +127,7 @@ export const Charts = () => {
                   i: number
                 ) => (
                   <Link to={`/song-details/${elem.item.id}`}>
-                    <div className="chartsElems" key={elem.item.id}>
+                    <div className="chartsElems">
                       <p className="chartNum">{i + 1}</p>
                       <img
                         className="chartImg"

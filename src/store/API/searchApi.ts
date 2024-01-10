@@ -11,7 +11,7 @@ export const searchApi = createApi({
       headers.set('X-RapidAPI-Host', xHost)
     },
   }),
-  refetchOnFocus: true,
+  // refetchOnFocus: true,
   endpoints: (build) => ({
     searchLyrics: build.query<ServerResponse, string>({
       query: (q: string) => ({

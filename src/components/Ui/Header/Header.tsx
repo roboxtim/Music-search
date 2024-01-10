@@ -6,11 +6,13 @@ import { StyledHeader } from "./Header.style";
 import { useSearchLyricsQuery } from "../../../store/API/searchApi";
 import { Link } from "react-router-dom";
 import { ThemeContext, themes } from "../../../contexts/themeContext";
+import { useDebounce } from "../../../hooks/debounce";
 
 export const Header = () => {
   const user = useTypedSelector((state) => state.userSlice.user);
   const [searchValue, setSearchData] = useState("");
   const [dropDown, setDropDown] = useState(false);
+  const debounced = useDebounce(searchValue);
   const { data: searchData } = useSearchLyricsQuery(searchValue, {
     refetchOnFocus: true,
   });
@@ -38,31 +40,63 @@ export const Header = () => {
           {dropDown && (
             <div className={`${theme === themes.dark && "dark"}`}>
               <Heading headingText="Search result" headingType="h3" />
-              {searchResult.map((elem: any) => {
-                if (elem.type === 'top_hit') {
-                  return elem.hits.map((hit: any) => 
-                  hit.index === 'song' && (
-                    <div key={hit.result.id}>
-                      <p>Top result</p>
-                      <p>{hit.result.title}</p>
-                    </div>
-                  ))
-                } else if (elem.type === 'song') {
-                  return elem.hits.map((hit: any) => (
-                    <p key={hit.result.id}>{hit.result.title}</p>
-                  ));
-                } else if (elem.type === 'lyric') {
-                  return elem.hits.map((hit: any) => (
-                    <p key={hit.result.id}>{hit.result.title}</p>
-                  ))
-                } else if (elem.type === 'artist') {
-                  return elem.hits.map((hit: any) => (
-                    <p key={hit.result.id}>{hit.result.name}</p>
-                  ))
-                } else if (elem.type === 'album') {
-                  return elem.hits.map((hit: any) => (
-                    <p key={hit.result.id}>{hit.result.name}</p>
-                  ))
+              {searchResult.map((elem: any) => { // eslint-disable-line
+                if (elem.type === "top_hit") {
+                  return elem.hits.map(
+                    (
+                      hit: any // eslint-disable-line
+                    ) =>
+                      hit.index === "song" && (
+                        <div className="topResult" key={hit.result.id}>
+                          <p className="topResultText">Top result</p>
+                          <div className="songInfo">
+                            <img
+                              src={hit.result.song_art_image_thumbnail_url}
+                              alt=""
+                            />
+                            <div className="songDetails">
+                              <p className="songTitle">{hit.result.title}</p>
+                              <p className="songArtist">
+                                {hit.result.artist_names}
+                              </p>
+                              <p>
+                                {hit.result.stats.pageviews > 1000000
+                                  ? (hit.result.stats.pageviews / 1000000)
+                                      .toFixed(1)
+                                      .replace(/\.0+$/, "") + "M"
+                                  : (hit.result.stats.pageviews / 100000)
+                                      .toFixed(1)
+                                      .replace(/\.0+$/, "") + "k"}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                  );
+                } else if (elem.type === "song") {
+                  return elem.hits.map(
+                    (
+                      hit: any // eslint-disable-line
+                    ) => <p key={hit.result.id}>{hit.result.title}</p>
+                  );
+                } else if (elem.type === "lyric") {
+                  return elem.hits.map(
+                    (
+                      hit: any // eslint-disable-line
+                    ) => <p key={hit.result.id}>{hit.result.title}</p>
+                  );
+                } else if (elem.type === "artist") {
+                  return elem.hits.map(
+                    (
+                      hit: any // eslint-disable-line
+                    ) => <p key={hit.result.id}>{hit.result.name}</p>
+                  );
+                } else if (elem.type === "album") {
+                  return elem.hits.map(
+                    (
+                      hit: any // eslint-disable-line
+                    ) => <p key={hit.result.id}>{hit.result.name}</p>
+                  );
                 }
               })}
             </div>
