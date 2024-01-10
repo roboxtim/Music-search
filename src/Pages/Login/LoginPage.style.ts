@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledLoginPage = styled.div`
-  margin: 0 auto;
+  margin: 100px auto;
   padding: 48px 72px;
   box-shadow: 0 0 10px lightgrey;
   border-radius: 20px;
@@ -22,14 +22,13 @@ export const StyledLoginPage = styled.div`
     padding: 12px 16px;
     width: 90%;
     border-radius: 8px;
-    border: 3px solid #E0EFFE;
-    color: #5A5A5D;
+    border: 3px solid #e0effe;
+    color: #5a5a5d;
   }
 
   label {
     font-size: 16px;
-    color: #5A5A5D;
-
+    color: #5a5a5d;
   }
 
   a {
@@ -43,4 +42,4 @@ export const StyledLoginPage = styled.div`
       text-decoration: underline;
     }
   }
-`
+`;

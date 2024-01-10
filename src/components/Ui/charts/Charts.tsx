@@ -75,7 +75,7 @@ export const Charts = () => {
     setIsOpen(false);
   };
 
-  const { theme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
   return (
     <StyledCharts>
       <div className={`container ${theme === themes.dark && "dark"}`}>

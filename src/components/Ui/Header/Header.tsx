@@ -13,16 +13,16 @@ export const Header = () => {
   const [searchValue, setSearchData] = useState("");
   const [dropDown, setDropDown] = useState(false);
   const debounced = useDebounce(searchValue);
-  const { data: searchData } = useSearchLyricsQuery(searchValue, {
+  const { data: searchData } = useSearchLyricsQuery(debounced, {
+    skip: debounced.length < 3,
     refetchOnFocus: true,
   });
 
   const searchResult = searchData?.sections;
-  const searchValueBoolean = Boolean(searchValue)
 
   useEffect(() => {
-    setDropDown(searchValueBoolean);
-  }, [searchValueBoolean]);
+    setDropDown(debounced.length > 3 && searchResult?.length > 0);
+  }, [debounced, searchResult]);
 
   const { theme } = useContext(ThemeContext);
 
@@ -40,15 +40,50 @@ export const Header = () => {
           {dropDown && (
             <div className={`${theme === themes.dark && "dark"}`}>
               <Heading headingText="Search result" headingType="h3" />
-              {searchResult.map((elem: any) => { // eslint-disable-line
+              <p className="topResultText">Top result</p>
+              {searchResult.map((elem: any) => {
+                // eslint-disable-line
                 if (elem.type === "top_hit") {
                   return elem.hits.map(
                     (
                       hit: any // eslint-disable-line
                     ) =>
                       hit.index === "song" && (
+                        <Link to={`/song-details/${hit.result.id}`}>
+                          <div className="topResult" key={hit.result.id}>
+                            <div className="songInfo">
+                              <img
+                                src={hit.result.song_art_image_thumbnail_url}
+                                alt=""
+                              />
+                              <div className="songDetails">
+                                <p className="songTitle">{hit.result.title}</p>
+                                <p className="songArtist">
+                                  {hit.result.artist_names}
+                                </p>
+                                <p>
+                                  {hit.result.stats.pageviews > 1000000
+                                    ? (hit.result.stats.pageviews / 1000000)
+                                        .toFixed(1)
+                                        .replace(/\.0+$/, "") + "M"
+                                    : (hit.result.stats.pageviews / 100000)
+                                        .toFixed(1)
+                                        .replace(/\.0+$/, "") + "k"}
+                                </p>
+                              </div>
+                            </div>
+                            <p className="topResultText">Top songs</p>
+                          </div>
+                        </Link>
+                      )
+                  );
+                } else if (elem.type === "song") {
+                  return elem.hits.map(
+                    (
+                      hit: any // eslint-disable-line
+                    ) => (
+                      <Link to={`/song-details/${hit.result.id}`}>
                         <div className="topResult" key={hit.result.id}>
-                          <p className="topResultText">Top result</p>
                           <div className="songInfo">
                             <img
                               src={hit.result.song_art_image_thumbnail_url}
@@ -71,31 +106,42 @@ export const Header = () => {
                             </div>
                           </div>
                         </div>
-                      )
-                  );
-                } else if (elem.type === "song") {
-                  return elem.hits.map(
-                    (
-                      hit: any // eslint-disable-line
-                    ) => <p key={hit.result.id}>{hit.result.title}</p>
-                  );
-                } else if (elem.type === "lyric") {
-                  return elem.hits.map(
-                    (
-                      hit: any // eslint-disable-line
-                    ) => <p key={hit.result.id}>{hit.result.title}</p>
+                      </Link>
+                    )
                   );
                 } else if (elem.type === "artist") {
                   return elem.hits.map(
                     (
                       hit: any // eslint-disable-line
-                    ) => <p key={hit.result.id}>{hit.result.name}</p>
+                    ) => (
+                      <Link to={`/artist-details/${hit.result.id}`}>
+                        <div className="topResult artist" key={hit.result.id}>
+                          <div className="songInfo">
+                            <img src={hit.result.image_url} alt="" />
+                            <div className="songDetails">
+                              <p className="songTitle">{hit.result.name}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    )
                   );
                 } else if (elem.type === "album") {
                   return elem.hits.map(
                     (
                       hit: any // eslint-disable-line
-                    ) => <p key={hit.result.id}>{hit.result.name}</p>
+                    ) => (
+                      <Link to={`/album-details/${hit.result.id}`}>
+                        <div className="topResult album" key={hit.result.id}>
+                          <div className="songInfo">
+                            <img src={hit.result.cover_art_url} alt="" />
+                            <div className="songDetails">
+                              <p className="songTitle">{hit.result.name}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    )
                   );
                 }
               })}

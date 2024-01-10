@@ -9,7 +9,9 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [themeValue, setThemeValue] = useState(themes.light);
 
   useEffect(() => {
-    const persistedTheme: string = JSON.parse(localStorage.getItem('currentTheme')!)
+    const persistedTheme: string = JSON.parse(
+      localStorage.getItem("currentTheme")!
+    );
     if (persistedTheme) {
       setThemeValue(persistedTheme);
     }

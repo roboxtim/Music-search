@@ -153,7 +153,6 @@ export const StyledCharts = styled.div`
       .chartsOption {
         border-color: ${(props) => props.theme.colors.white};
         .firstBlockText {
-    
           p {
             color: ${(props) => props.theme.colors.white};
           }
@@ -170,6 +169,5 @@ export const StyledCharts = styled.div`
     .chartsElems p {
       color: ${(props) => props.theme.colors.white};
     }
-
   }
 `;

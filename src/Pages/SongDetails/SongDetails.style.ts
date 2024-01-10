@@ -31,7 +31,7 @@ export const StyledSongDetails = styled.div`
           font-size: 28px;
           margin-bottom: 12px;
         }
-    
+
         h3 {
           font-size: 20px;
           margin-bottom: 12px;
@@ -70,9 +70,8 @@ export const StyledSongDetails = styled.div`
       }
       button:hover {
         box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-        transition: .9s ease;
+        transition: 0.9s ease;
       }
-
     }
   }
 
@@ -89,7 +88,11 @@ export const StyledSongDetails = styled.div`
   }
 
   #songDescriptionAbout {
-    background: linear-gradient(to top, ${getRandomColor()}, ${getRandomColor()});
+    background: linear-gradient(
+      to top,
+      ${getRandomColor()},
+      ${getRandomColor()}
+    );
     color: black;
     padding: 40px 200px;
 
@@ -107,6 +110,7 @@ export const StyledSongDetails = styled.div`
   }
 
   .container.dark {
+    color: white;
     .lyrics {
       background: black;
       transition: ease-in-out 0.3s;

@@ -12,6 +12,7 @@ export const StyledNavBar = styled.div`
     border-right: 1px solid;
     padding: 0 32px;
     color: white;
+    cursor: pointer;
   }
 
   a:first-child {
@@ -21,6 +22,7 @@ export const StyledNavBar = styled.div`
     padding: 0 32px;
     color: white;
     text-transform: uppercase;
+    cursor: pointer;
   }
 
   a:last-child {
@@ -30,5 +32,6 @@ export const StyledNavBar = styled.div`
     padding: 0 32px;
     color: white;
     text-transform: uppercase;
+    cursor: pointer;
   }
 `;

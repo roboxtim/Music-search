@@ -15,11 +15,11 @@ export const StyledComponentWithBackgroundImage = styled.div<IImageUrl>`
   filter: blur(2px);
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); 
+    background-color: rgba(0, 0, 0, 0.9);
   }
 `;
 
@@ -86,7 +86,7 @@ export const StyledAlbumDetails = styled.div`
       }
       button:hover {
         box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-        transition: .9s ease;
+        transition: 0.9s ease;
       }
     }
   }
@@ -111,7 +111,6 @@ export const StyledAlbumDetails = styled.div`
           width: 200px;
           padding: 16px;
 
-
           span {
             color: gray;
             text-transform: capitalize;
@@ -129,6 +128,16 @@ export const StyledAlbumDetails = styled.div`
       background: #fff;
       padding: 24px;
       height: 100%;
+    }
+  }
+
+  .dark {
+    background: black;
+    color: white;
+
+    .albumTracksDiscription {
+      background: black;
+      color: white;
     }
   }
 `;

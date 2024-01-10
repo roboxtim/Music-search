@@ -52,7 +52,7 @@ export const StyledArtistDetails = styled.div`
       }
       button:hover {
         box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-        transition: .9s ease;
+        transition: 0.9s ease;
       }
     }
   }
@@ -62,12 +62,11 @@ export const StyledArtistDetails = styled.div`
     justify-content: center;
     gap: 80px;
     margin-top: 60px;
-    
+
     .artisContainerInfo {
       width: 400px;
 
       .artistInfo {
-
         .artistName {
           display: flex;
           gap: 12px;
@@ -171,7 +170,6 @@ export const StyledArtistDetails = styled.div`
             font-size: 12px;
             margin-top: 4px;
           }
-
         }
 
         .attributionValue {
@@ -196,8 +194,8 @@ export const StyledArtistDetails = styled.div`
         .songs {
           display: flex;
           flex-basis: 255px;
-          background-color: #fff;
           gap: 6px;
+          border: 1px solid;
 
           img {
             width: 75px;
@@ -205,9 +203,7 @@ export const StyledArtistDetails = styled.div`
 
           .songInfo {
             margin-top: 8px;
-
           }
-
         }
       }
     }
@@ -231,6 +227,18 @@ export const StyledArtistDetails = styled.div`
           text-align: center;
         }
       }
+    }
+  }
+
+  .dark {
+    background: black;
+    color: white;
+
+    .artistDescription,
+    .artistLeaderboard,
+    .songs,
+    .artistAlbums {
+      background: black;
     }
   }
 `;

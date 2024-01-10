@@ -35,11 +35,12 @@ export const SongDetails = () => {
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]"!);
-    
-    const updatedFavorites = isFavorite && favorites !== dataSong?.id
-      ? favorites.filter((favId: string) => favId !== dataSong?.id)
-      : [...favorites, dataSong];
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
+    const updatedFavorites =
+      isFavorite && favorites !== dataSong?.id
+        ? favorites.filter((favId: string) => favId !== dataSong?.id)
+        : [...favorites, dataSong];
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
   return (

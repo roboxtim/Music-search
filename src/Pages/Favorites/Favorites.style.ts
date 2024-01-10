@@ -1,31 +1,63 @@
 import styled from "styled-components";
 
 export const StyledFavorites = styled.div`
-  .chartsElems {
-    display: grid;
-    grid-template-columns: 52px 0.15fr 1fr 1fr 0.2fr;
-    gap: 10px;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  height: 100vh;
+
+  .listData {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    padding-top: 30px;
+
+    .dataSong,
+    .datdAlbum,
+    .dataArtist {
+      width: 30%;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .chartsElems {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 10px;
+
+      img {
+        width: 100%;
+        max-height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .chartTitle {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .chartArtist {
+        font-style: italic;
+        margin-bottom: 5px;
+      }
+
+      .chartView {
+        font-size: 12px;
+      }
+    }
   }
 
-  .chartsElems > div:first-child {
-    font-weight: bold;
-    font-size: 16px;
-  }
-
-  .chartNum {
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  .chartImg {
-    width: 60px;
-  }
-
-  .chartTitle {
-    font-size: 24px;
-    font-weight: 600;
+  .dark {
+    background: black;
+    color: white;
+    .chartTitle,
+    .chartArtist,
+    .chartView {
+      color: white;
+    }
   }
 `;

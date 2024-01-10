@@ -50,44 +50,49 @@ export const StyledHeader = styled.div`
 
   .searchResult {
     position: absolute;
-    background: white;
+    top: 57.5px;
+    background-color: #f6f6f6;
     width: 360px;
-    height: 400px;
-    padding: 20px;
     overflow-y: scroll;
 
-    .topResult {
+    h3 {
+      padding: 12px;
+      color: gray;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
 
-      .topResultText {
-        color: gray;
-        padding: 20px 0 8px 16px;
+    .topResultText {
+      color: gray;
+      padding: 20px 0 8px 16px;
+      text-transform: uppercase;
+    }
+
+    .songInfo {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-gap: 16px;
+      margin-bottom: 20px;
+
+      img {
+        width: 75px;
       }
 
-      .songInfo {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-gap: 16px;
+      .songTitle {
+      }
 
-        img {
-
-          width: 75px;
-        }
-
-        .songTitle {
-
-        }
-
-        .songArtist {
-          grid-column: 2;
-
-        }
+      .songArtist {
+        grid-column: 2;
       }
     }
-    
   }
 
-  ul.dark {
+  div.dark {
     background: black;
     color: white;
+
+    p {
+      color: white;
+    }
   }
 `;
