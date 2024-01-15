@@ -13,7 +13,7 @@ export const searchApi = createApi({
   }),
   // refetchOnFocus: true,
   endpoints: (build) => ({
-    searchLyrics: build.query<ServerResponse, string>({
+    searchLyrics: build.query<ServerResponse, any>({ //eslint-disable-line
       query: (q: string) => ({
         url: `/search/multi/?q=${q}`,
       }),
