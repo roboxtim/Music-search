@@ -7,7 +7,7 @@ export const NavBar = () => {
   const { toggleTheme } = useContext(ThemeContext);
   return (
     <StyledNavBar>
-      <a onClick={toggleTheme}>Change theme</a>
+      <Link to={"/favorites"}>Favorites</Link>
       <a href="http://the50th.genius.com" target="_blanc">
         <span>THE 50TH</span>
       </a>
@@ -29,7 +29,13 @@ export const NavBar = () => {
       <a href="https://genius.com/new">
         <span>ADD SONG</span>
       </a>
-      <Link to={"/favorites"}>Favorites</Link>
+      <div className="toggleCover">
+        <div onClick={toggleTheme} className="button r" id="button-1">
+          <input type="checkbox" className="checkbox" />
+          <div className="knobs"></div>
+          <div className="layer"></div>
+        </div>
+      </div>
     </StyledNavBar>
   );
 };
