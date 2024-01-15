@@ -4,7 +4,7 @@ import { Heading } from "../../TypoGraphy/Heading";
 import { Input } from "../input/Input";
 import { StyledHeader } from "./Header.style";
 import { useSearchLyricsQuery } from "../../../store/API/searchApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext, themes } from "../../../contexts/themeContext";
 import { useDebounce } from "../../../hooks/debounce";
 
@@ -19,12 +19,20 @@ export const Header = () => {
   });
 
   const searchResult = searchData?.sections;
+  console.log(searchData);
+  
 
   useEffect(() => {
     setDropDown(debounced.length > 3 && searchResult?.length > 0);
   }, [debounced, searchResult]);
 
   const { theme } = useContext(ThemeContext);
+
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    navigate('/')
+  }
 
   return (
     <StyledHeader>
@@ -41,8 +49,7 @@ export const Header = () => {
             <div className={`${theme === themes.dark && "dark"}`}>
               <Heading headingText="Search result" headingType="h3" />
               <p className="topResultText">Top result</p>
-              {searchResult.map((elem: any) => {
-                // eslint-disable-line
+              {searchResult.map((elem: any) => {// eslint-disable-line
                 if (elem.type === "top_hit") {
                   return elem.hits.map(
                     (
@@ -186,6 +193,9 @@ export const Header = () => {
       <div className="userInfo">
         <img className="userImg" src="./public/img/user.png" alt="User img" />
         <h3>{user?.name}</h3>
+        <div className="btnCont">
+          <button onClick={handleLogout}>Log out</button>
+        </div>
       </div>
     </StyledHeader>
   );

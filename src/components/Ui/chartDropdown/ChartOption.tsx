@@ -3,6 +3,7 @@ import { Heading } from "../../TypoGraphy/Heading";
 interface Option {
   label: string;
   value: string;
+  id: string;
 }
 
 interface GenreSelectorProps {
@@ -20,7 +21,7 @@ export const ChartGenre = ({
     <div className="typeOption">
       <Heading headingText={title} headingType="h4" />
       {options.map((option) => (
-        <p key={option.value} onClick={() => onSelect(option.value)}>
+        <p key={option.id} onClick={() => onSelect(option.value)}>
           {option.label}
         </p>
       ))}

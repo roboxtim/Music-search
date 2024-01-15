@@ -84,6 +84,9 @@ export const Favorites = () => {
                         />
                         <p className="chartTitle">{elem.name}</p>
                         <p className="chartArtist">{elem.artist.name}</p>
+                        <button onClick={() => removeFromFavorites(elem.id)}>
+                          remove
+                        </button>
                       </div>
                     </Link>
                   ) : (
@@ -103,6 +106,9 @@ export const Favorites = () => {
                       <div className="chartsElems" key={elem.id}>
                         <img className="chartImg" src={elem.image_url} alt="" />
                         <p className="chartArtist">{elem.name}</p>
+                        <button onClick={() => removeFromFavorites(elem.id)}>
+                          remove
+                        </button>
                       </div>
                     </Link>
                   ) : (

@@ -46,6 +46,15 @@ export const StyledHeader = styled.div`
       border-radius: 50%;
       align-self: center;
     }
+
+    .btnCont {
+      align-self: center;
+      button {
+        padding: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    }
   }
 
   .searchResult {
