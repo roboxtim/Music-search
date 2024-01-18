@@ -18,7 +18,7 @@ export const Favorites = () => {
 
   const removeFromFavorites = (idToRemove: string) => {
     const updatedFavorites = favSongs.filter(
-      (song: any) => song.id !== idToRemove
+      (song: any) => song.id !== idToRemove // eslint-disable-line
     );
     setFavSongs(updatedFavorites);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
@@ -38,57 +38,64 @@ export const Favorites = () => {
               {favSongs.map(
                 (
                   elem: any //eslint-disable-line
-                ) => (
-                  <Link to={`/song-details/${elem.id}`}>
+                ) =>
+                  elem._type === "song" ? (
                     <div className="chartsElems" key={elem.id}>
-                      <img
-                        className="chartImg"
-                        src={elem.song_art_image_url}
-                        alt=""
-                      />
-                      <p className="chartTitle">{elem.title}</p>
-                      <p className="chartArtist">{elem.artist_names}</p>
-                      <p className="chartView">
-                        {elem && elem.stats
-                          ? elem.stats.pageviews > 1000000
-                            ? (elem.stats.pageviews / 1000000)
-                                .toFixed(1)
-                                .replace(/\.0+$/, "") + "M"
-                            : (elem.stats.pageviews / 100000)
-                                .toFixed(1)
-                                .replace(/\.0+$/, "") + "k"
-                          : ""}
-                      </p>
+                      <Link to={`/song-details/${elem.id}`}>
+                        <div>
+                          <img
+                            className="chartImg"
+                            src={elem.song_art_image_url}
+                            alt=""
+                          />
+                          <p className="chartTitle">{elem.title}</p>
+                          <p className="chartArtist">{elem.artist_names}</p>
+                          <p className="chartView">
+                            {elem && elem.stats
+                              ? elem.stats.pageviews > 1000000
+                                ? (elem.stats.pageviews / 1000000)
+                                    .toFixed(1)
+                                    .replace(/\.0+$/, "") + "M"
+                                : (elem.stats.pageviews / 100000)
+                                    .toFixed(1)
+                                    .replace(/\.0+$/, "") + "k"
+                              : ""}
+                          </p>
+                        </div>
+                      </Link>
                       <button onClick={() => removeFromFavorites(elem.id)}>
-                        remove
+                        Remove
                       </button>
                     </div>
-                  </Link>
-                )
+                  ) : (
+                    ""
+                  )
               )}
             </div>
 
             <div className="datdAlbum">
-              <Heading headingText="Favorite songs" />
+              <Heading headingText="Favorite album" />
               {favSongs.map(
                 (
                   elem: any //eslint-disable-line
                 ) =>
                   elem._type === "album" ? (
-                    <Link to={`/album-details/${elem.id}`}>
-                      <div className="chartsElems" key={elem.id}>
-                        <img
-                          className="chartImg"
-                          src={elem.cover_art_url}
-                          alt=""
-                        />
-                        <p className="chartTitle">{elem.name}</p>
-                        <p className="chartArtist">{elem.artist.name}</p>
-                        <button onClick={() => removeFromFavorites(elem.id)}>
-                          remove
-                        </button>
-                      </div>
-                    </Link>
+                    <div className="chartsElems" key={elem.id}>
+                      <Link to={`/album-details/${elem.id}`}>
+                        <div>
+                          <img
+                            className="chartImg"
+                            src={elem.cover_art_url}
+                            alt=""
+                          />
+                          <p className="chartTitle">{elem.name}</p>
+                          <p className="chartArtist">{elem.artist.name}</p>
+                        </div>
+                      </Link>
+                      <button onClick={() => removeFromFavorites(elem.id)}>
+                        Remove
+                      </button>
+                    </div>
                   ) : (
                     ""
                   )
@@ -102,15 +109,21 @@ export const Favorites = () => {
                   elem: any //eslint-disable-line
                 ) =>
                   elem._type === "artist" ? (
-                    <Link to={`/artist-details/${elem.id}`}>
-                      <div className="chartsElems" key={elem.id}>
-                        <img className="chartImg" src={elem.image_url} alt="" />
-                        <p className="chartArtist">{elem.name}</p>
-                        <button onClick={() => removeFromFavorites(elem.id)}>
-                          remove
-                        </button>
-                      </div>
-                    </Link>
+                    <div className="chartsElems" key={elem.id}>
+                      <Link to={`/artist-details/${elem.id}`}>
+                        <div>
+                          <img
+                            className="chartImg"
+                            src={elem.image_url}
+                            alt=""
+                          />
+                          <p className="chartArtist">{elem.name}</p>
+                        </div>
+                      </Link>
+                      <button onClick={() => removeFromFavorites(elem.id)}>
+                        Remove
+                      </button>
+                    </div>
                   ) : (
                     ""
                   )

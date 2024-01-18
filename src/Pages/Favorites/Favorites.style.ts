@@ -48,6 +48,14 @@ export const StyledFavorites = styled.div`
       .chartView {
         font-size: 12px;
       }
+
+      button {
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-top: 12px;
+        cursor: pointer;
+        background: ${(props) => props.theme.colors.lightGray};
+      }
     }
   }
 
