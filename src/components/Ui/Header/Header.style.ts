@@ -62,6 +62,7 @@ export const StyledHeader = styled.div`
     top: 57.5px;
     background-color: #f6f6f6;
     width: 360px;
+    height: 600px;
     overflow-y: scroll;
 
     h3 {

@@ -43,13 +43,50 @@ export const Header = () => {
           value={searchValue}
           onChange={(e) => setSearchData(e.target.value)}
         />
-        <div className="searchResult">
-          {dropDown && (
-            <div className={`${theme === themes.dark && "dark"}`}>
-              <Heading headingText="Search result" headingType="h3" />
+        {dropDown && (
+          <div className={`searchResult ${theme === themes.dark && "dark"}`}>
+            <Heading headingText="Search result" headingType="h3" />
+            <p className="topResultText">Top result</p>
+            {searchResult.map((elem: any) => {// eslint-disable-line
+              if (elem.type == "top_hit") {
+                return elem.hits.map(
+                  (
+                    hit: any // eslint-disable-line
+                  ) =>
+                    hit.index === "song" && (
+                      <Link to={`/song-details/${hit.result.id}`}>
+                        <div className="topResult" key={hit.result.id}>
+                          <div className="songInfo">
+                            <img
+                              src={hit.result.song_art_image_thumbnail_url}
+                              alt=""
+                            />
+                            <div className="songDetails">
+                              <p className="songTitle">{hit.result.title}</p>
+                              <p className="songArtist">
+                                {hit.result.artist_names}
+                              </p>
+                              <p>
+                                {hit.result.stats.pageviews > 1000000
+                                  ? (hit.result.stats.pageviews / 1000000)
+                                      .toFixed(1)
+                                      .replace(/\.0+$/, "") + "M"
+                                  : (hit.result.stats.pageviews / 100000)
+                                      .toFixed(1)
+                                      .replace(/\.0+$/, "") + "k"}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    )
+                );
+              }
+            })}
+            <div>
               <p className="topResultText">Top result</p>
               {searchResult.map((elem: any) => {// eslint-disable-line
-                if (elem.type == "top_hit") {
+                if (elem.type == "song") {
                   return elem.hits.map(
                     (
                       hit: any // eslint-disable-line
@@ -84,104 +121,57 @@ export const Header = () => {
                   );
                 }
               })}
-              <div>
-                <p className="topResultText">Top result</p>
-                {searchResult.map((elem: any) => {// eslint-disable-line
-                  if (elem.type == "song") {
-                    return elem.hits.map(
-                      (
-                        hit: any // eslint-disable-line
-                      ) =>
-                        hit.index === "song" && (
-                          <Link to={`/song-details/${hit.result.id}`}>
-                            <div className="topResult" key={hit.result.id}>
-                              <div className="songInfo">
-                                <img
-                                  src={hit.result.song_art_image_thumbnail_url}
-                                  alt=""
-                                />
-                                <div className="songDetails">
-                                  <p className="songTitle">
-                                    {hit.result.title}
-                                  </p>
-                                  <p className="songArtist">
-                                    {hit.result.artist_names}
-                                  </p>
-                                  <p>
-                                    {hit.result.stats.pageviews > 1000000
-                                      ? (hit.result.stats.pageviews / 1000000)
-                                          .toFixed(1)
-                                          .replace(/\.0+$/, "") + "M"
-                                      : (hit.result.stats.pageviews / 100000)
-                                          .toFixed(1)
-                                          .replace(/\.0+$/, "") + "k"}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
-                        )
-                    );
-                  }
-                })}
-              </div>
-              <div>
-                <p className="topResultText">Top result</p>
-                {searchResult.map((elem: any) => {// eslint-disable-line
-                  if (elem.type == "artist") {
-                    return elem.hits.map(
-                      (
-                        hit: any // eslint-disable-line
-                      ) =>
-                        hit.index === "artist" && (
-                          <Link to={`/artist-details/${hit.result.id}`}>
-                            <div
-                              className="topResult artist"
-                              key={hit.result.id}
-                            >
-                              <div className="songInfo">
-                                <img src={hit.result.image_url} alt="" />
-                                <div className="songDetails">
-                                  <p className="songTitle">{hit.result.name}</p>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
-                        )
-                    );
-                  }
-                })}
-              </div>
-              <div>
-                <p className="topResultText">Top result</p>
-                {searchResult.map((elem: any) => {// eslint-disable-line
-                  if (elem.type == "album") {
-                    return elem.hits.map(
-                      (
-                        hit: any // eslint-disable-line
-                      ) =>
-                        hit.index === "album" && (
-                          <Link to={`/album-details/${hit.result.id}`}>
-                            <div
-                              className="topResult album"
-                              key={hit.result.id}
-                            >
-                              <div className="songInfo">
-                                <img src={hit.result.cover_art_url} alt="" />
-                                <div className="songDetails">
-                                  <p className="songTitle">{hit.result.name}</p>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
-                        )
-                    );
-                  }
-                })}
-              </div>
             </div>
-          )}
-        </div>
+            <div>
+              <p className="topResultText">Top result</p>
+              {searchResult.map((elem: any) => {// eslint-disable-line
+                if (elem.type == "artist") {
+                  return elem.hits.map(
+                    (
+                      hit: any // eslint-disable-line
+                    ) =>
+                      hit.index === "artist" && (
+                        <Link to={`/artist-details/${hit.result.id}`}>
+                          <div className="topResult artist" key={hit.result.id}>
+                            <div className="songInfo">
+                              <img src={hit.result.image_url} alt="" />
+                              <div className="songDetails">
+                                <p className="songTitle">{hit.result.name}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      )
+                  );
+                }
+              })}
+            </div>
+            <div>
+              <p className="topResultText">Top result</p>
+              {searchResult.map((elem: any) => {// eslint-disable-line
+                if (elem.type == "album") {
+                  return elem.hits.map(
+                    (
+                      hit: any // eslint-disable-line
+                    ) =>
+                      hit.index === "album" && (
+                        <Link to={`/album-details/${hit.result.id}`}>
+                          <div className="topResult album" key={hit.result.id}>
+                            <div className="songInfo">
+                              <img src={hit.result.cover_art_url} alt="" />
+                              <div className="songDetails">
+                                <p className="songTitle">{hit.result.name}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      )
+                  );
+                }
+              })}
+            </div>
+          </div>
+        )}
       </div>
       <Link to="/main">
         <div className="headerLogo">
