@@ -1,5 +1,3 @@
-import React from "react";
-
 type HeadingProps = {
   headingText: string;
   className?: string;

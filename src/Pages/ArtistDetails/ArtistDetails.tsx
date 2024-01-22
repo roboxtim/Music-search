@@ -28,9 +28,12 @@ export const ArtistDetails = () => {
   const { data: artistSong } = useGeyArtistSongsByIdQuery(artistId);
   const { data: artistAlbum } = useGetArtistAlbumsByIdQuery(artistId);
 
+  // @ts-ignore
   const artistData = data?.artist;
   const artistDataLeaderboardInfo = artistDataLeaderboard?.leaderboard;
+  // @ts-ignore
   const artistSongsData = artistSong?.songs;
+  // @ts-ignore
   const artistAlbumData = artistAlbum?.albums;
 
   const imageUrl = `${artistData?.header_image_url}`;

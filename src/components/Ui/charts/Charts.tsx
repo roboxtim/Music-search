@@ -34,9 +34,13 @@ export const Charts = () => {
   const { data: lyricsData, isError: errorLytics } =
     useGetChartLyricsQuery(timePeriod);
 
+  // @ts-ignore
   const chartsData = data?.chart_items;
+  // @ts-ignore
   const chartAlbumData = albumData?.chart_items;
+  // @ts-ignore
   const chartArtistData = artistData?.chart_items;
+  // @ts-ignore
   const chartLyricsData = lyricsData?.chart_items;
 
   const genreOptions = [
@@ -76,6 +80,8 @@ export const Charts = () => {
   };
 
   const { theme } = useContext(ThemeContext);
+  // @ts-ignore
+  // @ts-ignore
   return (
     <StyledCharts>
       <div className={`container ${theme === themes.dark && "dark"}`}>

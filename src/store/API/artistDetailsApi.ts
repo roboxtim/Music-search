@@ -9,6 +9,7 @@ export interface IGetArtistSongsPayload {
   artistId: string;
   sort: string;
   per_page: number;
+  songs: any;
 }
 
 export const artistDetailsApi = createApi({

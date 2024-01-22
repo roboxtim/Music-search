@@ -18,8 +18,8 @@ export const Header = () => {
     refetchOnFocus: true,
   });
 
+  // @ts-ignore
   const searchResult = searchData?.sections;
-  console.log(searchResult);
 
   useEffect(() => {
     setDropDown(debounced.length > 3 && searchResult?.length > 0);

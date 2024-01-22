@@ -21,7 +21,9 @@ export const SongDetails = () => {
   const [fetchTriger, { data }] = useLazyGetSongByIdQuery();
   const { data: songLyricsData } = useGetSongLyricsQuery(songId);
 
+  // @ts-ignore
   const lyricsData = songLyricsData?.lyrics;
+  // @ts-ignore
   const dataSong = data?.song;
 
   useEffect(() => {

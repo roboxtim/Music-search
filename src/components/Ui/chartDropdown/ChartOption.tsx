@@ -3,7 +3,7 @@ import { Heading } from "../../TypoGraphy/Heading";
 interface Option {
   label: string;
   value: string;
-  id: string;
+  id?: string;
 }
 
 interface GenreSelectorProps {
