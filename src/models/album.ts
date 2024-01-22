@@ -1,6 +1,7 @@
 export interface IGetAlbumResponse {
   meta: Meta
-  response: Response
+  response: Response,
+  album?: any
 }
 // eslint-disable-line
 export interface Meta {

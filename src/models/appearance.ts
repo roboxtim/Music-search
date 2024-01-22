@@ -1,6 +1,7 @@
 export interface IGetAppearanceResponse {
   meta: Meta
-  response: Response
+  response: Response,
+  album_appearances?: any,
 }
 
 export interface Meta {
